@@ -1,0 +1,1 @@
+curl 'https://nooneb.b4a.app/?$RANDOM'
