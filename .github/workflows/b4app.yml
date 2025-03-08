@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '1,7,15,24,31,37,46,52 * * * *' #每个小时的第1,30分钟刷新一次
+    - cron: '1,15,31,46 * * * *' #每个小时的刷新4次,一天24x4得96
 jobs:
   refresh:
     runs-on: ubuntu-latest
