@@ -20,7 +20,7 @@ jobs:
       - name: Install graphics dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libgl1-mesa-glx libgtk-3-0  # Linux图形基础库[7](@ref)
+          sudo apt-get install -y libgl1-mesa0 libgtk-3-0  # Linux图形基础库[7](@ref)
 
       # 4. 配置虚拟显示服务器（核心修复）
       - name: Setup Xvfb
