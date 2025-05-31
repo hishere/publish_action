@@ -8,18 +8,31 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. 创建解压目录
-      - name: Create target directory
-        run: mkdir UABE
-
-      # 3. 解压 ZIP 文件（使用 PowerShell 原生命令）
-      - name: Unpack ZIP
+      # 2. 创建目标目录 D:\a（关键修正）
+      - name: Create D:\a directory
         shell: powershell
         run: |
-          Expand-Archive -Path tool.zip -DestinationPath UABE -Force
+          New-Item -ItemType Directory -Path "D:\a" -Force | Out-Null
 
-      # 4. 运行应用程序
-      - name: Run Application
+      # 3. 解压到 D:\a（路径修正）
+      - name: Unpack ZIP to D:\a
+        shell: powershell
         run: |
-          cd UABE
-          start AssetBundleExtractor.exe
+          Expand-Archive -Path tool.zip -DestinationPath "D:\a" -Force  # 目标路径改为 D:\a
+
+      # 4. 验证解压结果
+      - name: Verify extracted files
+        shell: powershell
+        run: |
+          $exePath = "D:\a\UABE\AssetBundleExtractor.exe"
+          if (-not (Test-Path -Path $exePath)) {
+            Write-Error "错误：AssetBundleExtractor.exe 未在 D:\a 中找到！"
+            Get-ChildItem -Path "D:\a"  # 列出目录内容以便调试
+            exit 1
+          }
+
+      # 5. 运行应用程序（工作目录设为 D:\a）
+      - name: Run Application
+        shell: powershell
+        run: |
+          Start-Process -FilePath "D:\a\UABE\AssetBundleExtractor.exe" -WorkingDirectory "D:\a"
