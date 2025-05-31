@@ -12,7 +12,7 @@ jobs:
         shell: powershell
         run: |
           # 运行安装程序，使用静默参数 /q
-          Start-Process -FilePath "aaa.exe" -ArgumentList "/ai" -Wait -NoNewWindow
+          Start-Process -FilePath "cpp.exe" -ArgumentList "/ai" -Wait -NoNewWindow
   
       # 2. 创建目标目录 D:\a（关键修正）
       - name: Create D:\a directory
