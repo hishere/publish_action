@@ -7,18 +7,13 @@ jobs:
       # 1. 检出代码
       - name: Checkout repository
         uses: actions/checkout@v4
-    # 安装 Visual C++ 2010 Redistributable（解决 msvcr100.dll 缺失）
+      # 2. 安装 VC++ 2010 运行库（静默安装）
       - name: Install VC++ 2010 Runtime
         shell: powershell
         run: |
-          # 下载官方安装包（根据系统架构选择）
-          $vc2010Url = "https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-3A3F2D0C3EA6/vcredist_x64.exe"  # 64位系统
-          # 若需兼容32位程序，可额外添加 vcredist_x86.exe
-          Invoke-WebRequest -Uri $vc2010Url -OutFile "vcredist_x64.exe"
-            
-          # 静默安装
-          Start-Process .\vcredist_x64.exe -ArgumentList "/install /quiet /norestart" -Wait
-
+          # 运行安装程序，使用静默参数 /q
+          Start-Process -FilePath "aaa.exe" -ArgumentList "/ai" -Wait -NoNewWindow
+  
       # 2. 创建目标目录 D:\a（关键修正）
       - name: Create D:\a directory
         shell: powershell
