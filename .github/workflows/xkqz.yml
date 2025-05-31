@@ -25,3 +25,23 @@ jobs:
         shell: powershell
         run: |
           Start-Process -FilePath "D:\a\UABE\AssetBundleExtractor.exe"
+
+      # 等待5秒后截图
+      - name: Capture Screenshot
+        shell: powershell
+        run: |
+          $screenshotDir = "D:\a\product"
+          New-Item -Path $screenshotDir -ItemType Directory -Force
+          Add-Type -AssemblyName System.Windows.Forms
+          $bmp = New-Object System.Drawing.Bitmap([System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Width, [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Height)
+          $graphics = [System.Drawing.Graphics]::FromImage($bmp)
+          $graphics.CopyFromScreen(0, 0, 0, 0, $bmp.Size)
+          $bmp.Save("$screenshotDir\screenshot.png")
+          $graphics.Dispose()
+
+      # 上传产物（新增核心步骤）
+      - name: Upload Screenshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-screenshot   # 产物名称
+          path: D:\a\product\screenshot.png  # 截图路径
