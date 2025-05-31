@@ -3,10 +3,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4   # 检出仓库代码[1,4](@ref)
+      - uses: actions/checkout@v4   # 检出仓库代码 [4](@ref)
+      
+      # 新增 .NET 运行时安装步骤（核心修复）
+      - name: Setup .NET 6.0 Runtime
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 6.0.x   # 指定应用所需的运行时版本 [4,5](@ref)
+
       - name: Unzip file
         run: |
-          unzip uabea-ubuntu.zip    # 解压ZIP文件
-          chmod +x UABEAvalonia              # 添加可执行权限[3,11](@ref)
+          unzip uabea-ubuntu.zip
+          chmod +x UABEAvalonia    # 添加可执行权限 [3](@ref)
+      
       - name: Run executable
-        run: ./UABEAvalonia              # 执行解压后的文件
+        run: ./UABEAvalonia         # 依赖的运行时已存在，可正常执行
