@@ -9,7 +9,7 @@ jobs:
       - name: Setup .NET 6.0 Runtime
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 6.0.5   # 指定应用所需的运行时版本 [4,5](@ref)
+          dotnet-version: 6.0.x   # 指定应用所需的运行时版本 [4,5](@ref)
 
       - name: Unzip file
         run: |
