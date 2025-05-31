@@ -1,10 +1,6 @@
 name: UABEAvalonia CI
 
-on: 
-  push:
-    branches: [ main ]  # 配置触发分支[3](@ref)
-    paths: 
-      - '**.zip'        # 仅当zip文件变化时触发[3](@ref)
+on: push
 
 jobs:
   run-app:
