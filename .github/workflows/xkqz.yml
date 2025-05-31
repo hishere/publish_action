@@ -1,1 +1,12 @@
 on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4   # 检出仓库代码[1,4](@ref)
+      - name: Unzip file
+        run: |
+          unzip uabea-ubuntu.zip    # 解压ZIP文件
+          chmod +x UABEAvalonia              # 添加可执行权限[3,11](@ref)
+      - name: Run executable
+        run: ./UABEAvalonia              # 执行解压后的文件
