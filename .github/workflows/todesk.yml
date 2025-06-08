@@ -12,10 +12,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 2. 解压ToDesk绿色版
-      - name: Unzip ToDesk
-        shell: pwsh
-        run: Expand-Archive -Path "ToDesk_4.6.0.1_Green.zip" -DestinationPath "." -Force
+      - name: min all windows
+        run: |
+          Add-Type -Name "Win32" -Member "[DllImport(`"user32.dll`")]public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);" -PassThru;
+          Get-Process | ? { $_.MainWindowHandle -ne 0 } | % { [Win32]::ShowWindowAsync($_.MainWindowHandle, 2) }
+        shell: powershell
 
       # 3. 启动ToDesk并等待5秒
       - name: Run ToDesk and Wait
