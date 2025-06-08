@@ -31,13 +31,9 @@ jobs:
       - name: Run ToDesk and Wait
         shell: pwsh
         run: |
-          $url = "https://oss.asklink.com/updata/official-version/windows/AskLink_Full_v4.0.8.3_20250603_2303.exe"
-          $downloadPath = Join-Path -Path $env:TEMP -ChildPath "software.exe"
-          Invoke-WebRequest -Uri $url -OutFile $downloadPath
-          Start-Process -FilePath $downloadPath -ArgumentList "/VERYSILENT" -Wait -NoNewWindow -PassThru | Out-Null
-          Start-Sleep -Seconds 15
-          #Start-Process .\ToDesk_4.6.0.1_Green\ToDesk.exe
-          #Start-Sleep -Seconds 5  # 延迟5秒确保界面加载
+          Start-Process -FilePath ".\ask.exe" -ArgumentList "/VERYSILENT" -NoNewWindow -Wait
+
+          Start-Sleep -Seconds 5  # 延迟5秒确保界面加载
           #python -c "import pyautogui; import time; time.sleep(1); pyautogui.press('enter'); time.sleep(1); pyautogui.press('enter'); pyautogui.press('enter'); pyautogui.moveTo(230,620); pyautogui.click(); time.sleep(1); pyautogui.click(); time.sleep(1); pyautogui.click(); time.sleep(1); pyautogui.click(); pyautogui.hotkey('alt', 'shift', 'tab'); time.sleep(1);" 
       # 4. 屏幕截图（使用Windows内置工具）
       - name: Take Screenshot
