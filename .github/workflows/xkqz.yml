@@ -1,5 +1,5 @@
 name: UABEAvalonia CI - Windows
-on: push
+#on: push
 jobs:
   run-app:
     runs-on: windows-latest
