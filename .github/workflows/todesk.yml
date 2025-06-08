@@ -33,7 +33,7 @@ jobs:
         run: |
           Start-Process .\ToDesk_4.6.0.1_Green\ToDesk.exe
           Start-Sleep -Seconds 5  # 延迟5秒确保界面加载
-          python -c "import pyautogui; import time; time.sleep(1); pyautogui.press('enter'); time.sleep(1); pyautogui.press('enter'); pyautogui.press('enter'); pyautogui.moveTo(230,620); pyautogui.click(); time.sleep(1); pyautogui.click(); time.sleep(1); pyautogui.click(); time.sleep(1); pyautogui.click();" 
+          python -c "import pyautogui; import time; time.sleep(1); pyautogui.press('enter'); time.sleep(1); pyautogui.press('enter'); pyautogui.press('enter'); pyautogui.moveTo(230,620); pyautogui.click(); time.sleep(1); pyautogui.click(); time.sleep(1); pyautogui.click(); time.sleep(1); pyautogui.click(); pyautogui.hotkey('alt', 'shift', 'tab'); time.sleep(1);" 
       # 4. 屏幕截图（使用Windows内置工具）
       - name: Take Screenshot
         shell: pwsh

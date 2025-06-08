@@ -1,5 +1,8 @@
-name: UABEAvalonia CI - Windows
-#on: push
+name: ueba
+on:
+  push:
+    paths:
+      - '.github/workflows/xkqz.yml'
 jobs:
   run-app:
     runs-on: windows-latest
