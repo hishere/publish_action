@@ -11,13 +11,15 @@ jobs:
       # 1. 检出代码
       - name: Checkout
         uses: actions/checkout@v4
-      # 3. 启动ToDesk并等待5秒
-      - run: .\ToDesk4.2.9green.exe
-      - name: Run ToDesk and Wait
-        shell: pwsh
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+          cache: 'pip'
+      - run: pip install -r .\requirements.txt
+      - name: Take_Screenshot_windows
         run: |
-          Start-Sleep -Seconds 6  # 延迟5秒确保界面加载
-
+          python -c "import pyautogui; import time; time.sleep(1); pyautogui.hotkey('win','d'); time.sleep(1); 
       # 4. 屏幕截图（使用Windows内置工具）
       - name: Take Screenshot
         shell: pwsh
@@ -43,4 +45,4 @@ jobs:
           subject: 运行截图
           body: "你好"
           attachments: ${{ env.SCREENSHOT_PATH }}  # 附加截图
-    
+
