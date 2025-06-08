@@ -23,14 +23,17 @@ jobs:
       - name: Take_Screenshot_windows
         run: |
           python -c "import pyautogui; import time; time.sleep(1); pyautogui.hotkey('win','d'); time.sleep(1);" 
+      - name: Direct Unzip to Current Directory
+        shell: pwsh
+        run: Expand-Archive -Path "ToDesk_4.6.0.1_Green.zip" -DestinationPath "." -Force
           
       # 3. 启动ToDesk并等待5秒
       - name: Run ToDesk and Wait
         shell: pwsh
         run: |
-          Start-Process .\ToDesk4.2.9green.exe
+          Start-Process .\ToDesk_4.6.0.1_Green\ToDesk.exe
           Start-Sleep -Seconds 5  # 延迟5秒确保界面加载
-          
+          python -c "import pyautogui; import time; time.sleep(1); pyautogui.press('enter'); time.sleep(1); pyautogui.press('enter'); pyautogui.press('enter');" 
       # 4. 屏幕截图（使用Windows内置工具）
       - name: Take Screenshot
         shell: pwsh
