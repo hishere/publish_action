@@ -11,18 +11,12 @@ jobs:
       # 1. 检出代码
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Minimize all windows
-        shell: pwsh
-        run: |
-         Add-Type -AssemblyName System.Windows.Forms
-         [Windows.Forms.SendKeys]::SendWait('^{ESC}d')  # 模拟 Win + D
-
       # 3. 启动ToDesk并等待5秒
+      - run: .\ToDesk4.2.9green.exe
       - name: Run ToDesk and Wait
         shell: pwsh
         run: |
-          Start-Process .\ToDesk4.2.9green.exe
-          Start-Sleep -Seconds 5  # 延迟5秒确保界面加载
+          Start-Sleep -Seconds 6  # 延迟5秒确保界面加载
 
       # 4. 屏幕截图（使用Windows内置工具）
       - name: Take Screenshot
