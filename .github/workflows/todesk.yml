@@ -21,7 +21,7 @@ jobs:
       - name: Run ToDesk and Wait
         shell: pwsh
         run: |
-          Start-Process .\ToDesk_4.6.0.1_Green\ToDesk.exe
+          Start-Process .\ToDesk4.2.9green.exe
           Start-Sleep -Seconds 5  # 延迟5秒确保界面加载
 
       # 4. 屏幕截图（使用Windows内置工具）
