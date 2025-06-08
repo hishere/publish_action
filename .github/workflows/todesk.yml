@@ -11,12 +11,24 @@ jobs:
       # 1. 检出代码
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: min all windows
-        run: |
-          Add-Type -Name "Win32" -Member "[DllImport(`"user32.dll`")]public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);" -PassThru;
-          Get-Process | ? { $_.MainWindowHandle -ne 0 } | % { [Win32]::ShowWindowAsync($_.MainWindowHandle, 2) }
+      - name: Minimize all windows
         shell: powershell
+        run: |
+          Add-Type -TypeDefinition @"
+            using System;
+            using System.Runtime.InteropServices;
+            public class Win32 {
+              [DllImport("user32.dll")]
+              public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
+            }
+          "@
+          # 发送 Win+D 快捷键
+          [Win32]::keybd_event(0x5B, 0, 0, 0)  # Win 键按下
+          [Win32]::keybd_event(0x44, 0, 0, 0)  # D 键按下
+          Start-Sleep -Milliseconds 100
+          [Win32]::keybd_event(0x44, 0, 2, 0)  # D 键释放
+          [Win32]::keybd_event(0x5B, 0, 2, 0)  # Win 键释放
+    
 
       # 3. 启动ToDesk并等待5秒
       - name: Run ToDesk and Wait
