@@ -1,5 +1,9 @@
 name: Install ToDesk on Windows
-on: push  # 手动触发
+on:
+  push:
+    paths:
+      - '.github/workflows/todesk.yml'  # 监听特定文件
+
 
 jobs:
   install-todesk:
