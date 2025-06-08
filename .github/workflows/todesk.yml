@@ -1,0 +1,20 @@
+name: Install ToDesk on Windows
+on: [workflow_dispatch]  # 手动触发
+
+jobs:
+  install-todesk:
+    runs-on: windows-latest  # 使用Windows虚拟机
+    steps:
+      - name: 下载ToDesk安装包
+        run: |
+          Invoke-WebRequest -Uri "https://dl.todesk.com/windows/ToDesk_Setup.exe" -OutFile "ToDesk_Setup.exe"
+      - name: 静默安装ToDesk
+        run: |
+          .\ToDesk_Setup.exe /S  # /S参数实现无界面静默安装
+      - name: 验证安装
+        run: |
+          if (Test-Path "C:\Program Files\ToDesk\ToDesk.exe") {
+            echo "ToDesk安装成功"
+          } else {
+            echo "安装失败"; exit 1
+          }
