@@ -19,7 +19,7 @@ jobs:
       - run: pip install -r .\requirements.txt
       - name: Take_Screenshot_windows
         run: |
-          python -c "import pyautogui; import time; time.sleep(1); pyautogui.hotkey('win','d'); time.sleep(1); 
+          python -c "import pyautogui; import time; time.sleep(1); pyautogui.hotkey('win','d'); time.sleep(1);" 
           
       # 3. 启动ToDesk并等待5秒
       - name: Run ToDesk and Wait
