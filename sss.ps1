@@ -51,12 +51,12 @@ public class MouseSimulator {
 [MouseSimulator]::ClickAt(646, 547)
 Start-Sleep -Seconds 2
 [MouseSimulator]::ClickAt(700, 618)
-Start-Sleep -Seconds 13
+Start-Sleep -Seconds 12
 
 # ===== 新增步骤 =====
 # 1. 在指定坐标点击
 [MouseSimulator]::ClickAt(489, 356)
-Start-Sleep -Seconds 5
+Start-Sleep -Seconds 4
 
 # 2. 获取剪贴板内容并保存到文件
 Add-Type -AssemblyName System.Windows.Forms  # 引用必需程序集[2,3](@ref)
