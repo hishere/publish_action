@@ -23,7 +23,7 @@ Start-Sleep -Seconds 1
 
 # 步骤2: 启动 ToDesk 并等待
 Start-Process -FilePath ".\ask.exe"
-Start-Sleep -Seconds 9
+Start-Sleep -Seconds 11
 
 # 步骤3: 鼠标操作函数
 Add-Type -TypeDefinition @"
@@ -51,12 +51,12 @@ public class MouseSimulator {
 [MouseSimulator]::ClickAt(646, 547)
 Start-Sleep -Seconds 2
 [MouseSimulator]::ClickAt(700, 618)
-Start-Sleep -Seconds 12
+Start-Sleep -Seconds 13
 
 # ===== 新增步骤 =====
 # 1. 在指定坐标点击
 [MouseSimulator]::ClickAt(489, 356)
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 5
 
 # 2. 获取剪贴板内容并保存到文件
 Add-Type -AssemblyName System.Windows.Forms  # 引用必需程序集[2,3](@ref)
@@ -66,6 +66,6 @@ if (-not [string]::IsNullOrEmpty($clipContent)) {
     $clipContent | Out-File -FilePath "output.txt" -Encoding UTF8
     Write-Host "剪贴板内容已保存到 output.txt" -ForegroundColor Green
 } else {
-    "空白" | Out-File -FilePath "output.txt" -Encoding UTF8  # 无内容时写入"空白"
+    "empty" | Out-File -FilePath "output.txt" -Encoding UTF8  # 无内容时写入"空白"
     Write-Host "剪贴板无内容，已写入'空白'到文件" -ForegroundColor Yellow
 }
