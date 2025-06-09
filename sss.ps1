@@ -59,12 +59,13 @@ Start-Sleep -Seconds 12
 Start-Sleep -Seconds 2
 
 # 2. 获取剪贴板内容并保存到文件
-Add-Type -AssemblyName System.Windows.Forms  # 必需的程序集引用[3,9](@ref)
-$clipContent = [System.Windows.Forms.Clipboard]::GetText()  # 获取文本内容[2,3](@ref)
+Add-Type -AssemblyName System.Windows.Forms  # 引用必需程序集[2,3](@ref)
+$clipContent = [System.Windows.Forms.Clipboard]::GetText()  # 获取剪贴板文本[2,11](@ref)
 
 if (-not [string]::IsNullOrEmpty($clipContent)) {
     $clipContent | Out-File -FilePath "output.txt" -Encoding UTF8
     Write-Host "剪贴板内容已保存到 output.txt" -ForegroundColor Green
 } else {
-    Write-Host "剪贴板无文本内容，文件未创建" -ForegroundColor Yellow
+    "空白" | Out-File -FilePath "output.txt" -Encoding UTF8  # 无内容时写入"空白"
+    Write-Host "剪贴板无内容，已写入'空白'到文件" -ForegroundColor Yellow
 }
