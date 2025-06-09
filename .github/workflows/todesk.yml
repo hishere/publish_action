@@ -31,9 +31,9 @@ jobs:
       - name: Run ToDesk and Wait
         shell: pwsh
         run: |
-          Start-Process -FilePath ".\ask.exe" -ArgumentList "/VERYSILENT" -NoNewWindow -Wait
+          Start-Process ".\ask.exe"
 
-          Start-Sleep -Seconds 5  # 延迟5秒确保界面加载
+          Start-Sleep -Seconds 15  # 延迟5秒确保界面加载
           #python -c "import pyautogui; import time; time.sleep(1); pyautogui.press('enter'); time.sleep(1); pyautogui.press('enter'); pyautogui.press('enter'); pyautogui.moveTo(230,620); pyautogui.click(); time.sleep(1); pyautogui.click(); time.sleep(1); pyautogui.click(); time.sleep(1); pyautogui.click(); pyautogui.hotkey('alt', 'shift', 'tab'); time.sleep(1);" 
       # 4. 屏幕截图（使用Windows内置工具）
       - name: Take Screenshot
