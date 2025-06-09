@@ -29,7 +29,7 @@ jobs:
         run: |
           Start-Process ".\ask.exe"
 
-          Start-Sleep -Seconds 5  # 延迟5秒确保界面加载
+          Start-Sleep -Seconds 9  # 延迟5秒确保界面加载
           python -c "import pyautogui; import time; time.sleep(1); pyautogui.moveTo(646,547); pyautogui.click(); time.sleep(2);pyautogui.moveTo(700,618); pyautogui.click(); time.sleep(15);" 
       # 4. 屏幕截图（使用Windows内置工具）
       - name: Take Screenshot
