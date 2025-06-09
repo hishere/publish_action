@@ -1,4 +1,4 @@
-name: run my ps1
+name: run my ps1x
 on:
   push:
     paths:
