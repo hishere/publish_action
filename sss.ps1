@@ -69,3 +69,4 @@ if (-not [string]::IsNullOrEmpty($clipContent)) {
     "empty" | Out-File -FilePath "output.txt" -Encoding UTF8  # 无内容时写入"空白"
     Write-Host "剪贴板无内容，已写入'空白'到文件" -ForegroundColor Yellow
 }
+Start-Sleep -Seconds 2
