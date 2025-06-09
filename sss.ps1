@@ -22,7 +22,7 @@ public class KeyboardSimulator {
 Start-Sleep -Seconds 1
 
 # 步骤2: 启动 ToDesk 并等待
-Start-Process -FilePath ".\ask.exe" -Wait
+Start-Process -FilePath ".\ask.exe"
 Start-Sleep -Seconds 9
 
 # 步骤3: 鼠标操作函数

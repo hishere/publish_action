@@ -1,4 +1,4 @@
-name: Install ToDesk and Send Screenshot
+name: run my ps1
 on:
   push:
     paths:
