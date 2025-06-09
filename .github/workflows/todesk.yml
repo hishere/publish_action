@@ -14,7 +14,13 @@ jobs:
       # 1. 检出代码
       - name: Checkout
         uses: actions/checkout@v4
-      - run: .\AutoHotkey_2.0.4_setup.exe "kong.ahk"
+      # 新增步骤：解压 ZIP 文件
+      - name: Unzip AutoHotkey
+        shell: pwsh
+        run: |
+          Expand-Archive -Path "AutoHotkey_2.0.19.zip" -DestinationPath "AutoHotkey"
+          Write-Output "AutoHotkey unzipped to 'AutoHotkey' folder"        
+      - run: .\AutoHotkey\AutoHotkey64.exe ".\kong.ahk"
       - name: Take Screenshot
         shell: pwsh
         run: |
