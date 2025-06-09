@@ -12,9 +12,13 @@ jobs:
     runs-on: windows-latest
     steps:
       # 1. 检出代码
-      - name: Checkout
-        uses: actions/checkout@v4
-      # 3. 启动ToDesk并等待5秒
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            sss.ps1
+            ask.exe
+          sparse-checkout-cone-mode: false  # 🔧 关键设置！
+          # 3. 启动ToDesk并等待5秒
       - name: Run ToDesk and Wait
         shell: pwsh
         run: |
