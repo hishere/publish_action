@@ -54,9 +54,11 @@ Start-Sleep -Seconds 2
 Start-Sleep -Seconds 12
 
 # ===== 新增步骤 =====
-# 1. 在指定坐标点击
+# 1. 在指定坐标点击两次防止不成功
 [MouseSimulator]::ClickAt(489, 356)
-Start-Sleep -Seconds 4
+Start-Sleep -Seconds 1
+[MouseSimulator]::ClickAt(489, 356)
+Start-Sleep -Seconds 1
 
 # 2. 获取剪贴板内容并保存到文件
 Add-Type -AssemblyName System.Windows.Forms  # 引用必需程序集[2,3](@ref)
