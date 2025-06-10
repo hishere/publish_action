@@ -1,4 +1,4 @@
-name: 运行windows2019
+name: 运行windows系统
 on:
   push:
     paths:
@@ -16,6 +16,7 @@ jobs:
         with:
           sparse-checkout: |
             sss.ps1
+            screen_save.ps1
             ask.exe
           sparse-checkout-cone-mode: false  # 🔧 关键设置！
           # 3. 启动ToDesk并等待5秒
