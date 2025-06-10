@@ -1,4 +1,4 @@
-name: 运行win11i
+name: 运行win11ik
 on:
   push:
     paths:
@@ -25,7 +25,7 @@ jobs:
         shell: pwsh
         run: |
           .\sss11.ps1
-          sleep 12
+          
       # 4. 屏幕截图（使用Windows内置工具）
       - name: Take Screenshot
         shell: pwsh
