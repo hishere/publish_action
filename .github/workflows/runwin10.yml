@@ -1,22 +1,21 @@
-name: 运行windows系统
+name: 运行win10
 on:
   push:
     paths:
-      - '.github/workflows/todesk2.yml'
+      - '.github/workflows/runwin10.yml'
 
 jobs:
   unzip_and_screenshot:
     timeout-minutes: 70
     env:
       ACTIONS_RUNNER_HOOK_JOB_COMPLETED: ""
-    runs-on: windows-11-arm
+    runs-on: windows-latest
     steps:
       # 1. 检出代码
       - uses: actions/checkout@v4
         with:
           sparse-checkout: |
             sss.ps1
-            screen_save.ps1
             ask.exe
           sparse-checkout-cone-mode: false  # 🔧 关键设置！
           # 3. 启动ToDesk并等待5秒
@@ -28,7 +27,12 @@ jobs:
       - name: Take Screenshot
         shell: pwsh
         run: |
-          .\screen_save.ps1
+          $screenshotPath = "$env:RUNNER_TEMP\screenshot.png"
+          Add-Type -AssemblyName System.Windows.Forms
+          [Windows.Forms.SendKeys]::SendWait('{PRTSC}')  # 模拟按下PrintScreen键
+          $image = [Windows.Forms.Clipboard]::GetImage()
+          $image.Save($screenshotPath, [Drawing.Imaging.ImageFormat]::Png)
+          echo "SCREENSHOT_PATH=$screenshotPath" >> $env:GITHUB_ENV
 
       # 5. 通过邮件发送截图
       - name: send mail
