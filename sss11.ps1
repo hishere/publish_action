@@ -21,9 +21,7 @@ public class KeyboardSimulator {
 [KeyboardSimulator]::SendWinD()
 Start-Sleep -Seconds 1
 
-# 步骤2: 启动 ToDesk 并等待
-#Start-Process -FilePath ".\ask.exe"
-#Start-Sleep -Seconds 11
+
 
 # 步骤3: 鼠标操作函数
 Add-Type -TypeDefinition @"
@@ -55,6 +53,22 @@ Start-Sleep -Seconds 2
 [MouseSimulator]::ClickAt(860, 660)
 Start-Sleep -Seconds 2
 
+# 步骤2: 启动 ToDesk 并等待
+Start-Process -FilePath ".\ask.exe"
+Start-Sleep -Seconds 11
+
+# 执行鼠标操作序列
+[MouseSimulator]::ClickAt(646, 547)
+Start-Sleep -Seconds 2
+[MouseSimulator]::ClickAt(700, 618)
+Start-Sleep -Seconds 12
+
+# ===== 新增步骤 =====
+# 1. 在指定坐标点击两次防止不成功
+[MouseSimulator]::ClickAt(488, 356)
+Start-Sleep -Seconds 1
+[MouseSimulator]::ClickAt(489, 355)
+Start-Sleep -Seconds 1
 
 # 2. 获取剪贴板内容并保存到文件
 Add-Type -AssemblyName System.Windows.Forms  # 引用必需程序集[2,3](@ref)
