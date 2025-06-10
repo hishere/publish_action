@@ -53,12 +53,12 @@ Start-Sleep -Seconds 2
 [MouseSimulator]::ClickAt(860, 660)
 Start-Sleep -Seconds 2
 
-[KeyboardSimulator]::SendWinD()
+[MouseSimulator]::ClickAt(1023, 767)
 Start-Sleep -Seconds 2
 
 # 步骤2: 启动 ToDesk 并等待
 Start-Process -FilePath ".\ask.exe"
-Start-Sleep -Seconds 9
+Start-Sleep -Seconds 12
 
 # 执行鼠标操作序列
 [MouseSimulator]::ClickAt(646, 547)
@@ -67,7 +67,12 @@ Start-Sleep -Seconds 2
 Start-Sleep -Seconds 14
 
 
-
+$file = "C:\Program Files\AskLink\AskLinkLauncher.exe"
+if (-not (Test-Path -LiteralPath $file)) {
+    Start-Sleep -Seconds 1
+}
+#Start-Process -FilePath "C:\Program Files\AskLink\AskLinkLauncher.exe"
+#Start-Sleep -Seconds 5
 
 # 引用必需程序集
 Add-Type -AssemblyName System.Windows.Forms
