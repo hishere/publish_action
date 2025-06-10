@@ -68,22 +68,46 @@ Start-Sleep -Seconds 12
 
 Start-Process -FilePath "C:\Program Files\AskLink\AskLinkLauncher.exe"
 Start-Sleep -Seconds 5
-# ===== 新增步骤 =====
-# 1. 在指定坐标点击两次防止不成功
-[MouseSimulator]::ClickAt(488, 356)
-Start-Sleep -Seconds 1
-[MouseSimulator]::ClickAt(489, 355)
-Start-Sleep -Seconds 1
+# 引用必需程序集
+Add-Type -AssemblyName System.Windows.Forms
 
-# 2. 获取剪贴板内容并保存到文件
-Add-Type -AssemblyName System.Windows.Forms  # 引用必需程序集[2,3](@ref)
-$clipContent = [System.Windows.Forms.Clipboard]::GetText()  # 获取剪贴板文本[2,11](@ref)
+# 定义点击函数
+function DoubleClick-AtPoint {
+    param($x, $y)
+    [MouseSimulator]::ClickAt($x, $y)
+    Start-Sleep -Seconds 1
+    [MouseSimulator]::ClickAt($x, $y)
+    Start-Sleep -Seconds 1
+}
 
+# 第一次点击操作
+DoubleClick-AtPoint -x 489 -y 356
+Start-Sleep -Seconds 2
+# 初次尝试获取剪贴板内容
+$clipContent = [System.Windows.Forms.Clipboard]::GetText()
+
+# 剪贴板内容检测和处理
 if (-not [string]::IsNullOrEmpty($clipContent)) {
     $clipContent | Out-File -FilePath "output.txt" -Encoding UTF8
     Write-Host "剪贴板内容已保存到 output.txt" -ForegroundColor Green
-} else {
-    "empty" | Out-File -FilePath "output.txt" -Encoding UTF8  # 无内容时写入"空白"
-    Write-Host "剪贴板无内容，已写入'空白'到文件" -ForegroundColor Yellow
+} 
+else {
+    # 剪贴板内容为空时进入重试流程
+    Write-Host "初次获取无内容，等待5秒后重试..." -ForegroundColor Yellow
+    Start-Sleep -Seconds 5
+    
+    # 重试点击操作
+    DoubleClick-AtPoint -x 489 -y 356
+    Start-Sleep -Seconds 2
+    
+    # 重新获取剪贴板内容
+    $clipContent = [System.Windows.Forms.Clipboard]::GetText()
+    
+    if (-not [string]::IsNullOrEmpty($clipContent)) {
+        $clipContent | Out-File -FilePath "output.txt" -Encoding UTF8
+        Write-Host "重试成功！内容已保存到 output.txt" -ForegroundColor Green
+    } else {
+        "empty" | Out-File -FilePath "output.txt" -Encoding UTF8
+        Write-Host "重试后仍无内容，已写入'empty'到文件" -ForegroundColor Red
+    }
 }
-Start-Sleep -Seconds 2
