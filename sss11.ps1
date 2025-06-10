@@ -67,10 +67,6 @@ Start-Sleep -Seconds 2
 Start-Sleep -Seconds 14
 
 
-$file = "C:\Program Files\AskLink\AskLinkLauncher.exe"
-if (-not (Test-Path -LiteralPath $file)) {
-    Start-Sleep -Seconds 1
-}
 #Start-Process -FilePath "C:\Program Files\AskLink\AskLinkLauncher.exe"
 #Start-Sleep -Seconds 5
 

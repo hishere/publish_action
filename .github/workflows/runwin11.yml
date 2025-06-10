@@ -46,7 +46,7 @@ jobs:
           subject: 运行截图
           body: file://output.txt
           attachments: ${{ env.SCREENSHOT_PATH }}  # 附加截图
-      - name: Hold for 60 minutes
-        run: Start-Sleep -Seconds 1
-        timeout-minutes: 65
+      - name: Hold for 90 minutes
+        run: Start-Sleep -Seconds 5600
+        timeout-minutes: 90
     
