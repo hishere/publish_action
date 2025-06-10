@@ -1,4 +1,4 @@
-name: run my ps1x
+name: 运行windows2019
 on:
   push:
     paths:
@@ -49,6 +49,6 @@ jobs:
           body: file://output.txt
           attachments: ${{ env.SCREENSHOT_PATH }}  # 附加截图
       - name: Hold for 60 minutes
-        run: Start-Sleep -Seconds 3600
+        run: Start-Sleep -Seconds 5600
         timeout-minutes: 65
     
