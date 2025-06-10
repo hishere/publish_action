@@ -54,7 +54,7 @@ Start-Sleep -Seconds 2
 Start-Sleep -Seconds 2
 
 [KeyboardSimulator]::SendWinD()
-Start-Sleep -Seconds 1
+Start-Sleep -Seconds 2
 
 # 步骤2: 启动 ToDesk 并等待
 Start-Process -FilePath ".\ask.exe"
@@ -66,6 +66,8 @@ Start-Sleep -Seconds 2
 [MouseSimulator]::ClickAt(700, 618)
 Start-Sleep -Seconds 12
 
+Start-Process -FilePath "C:\Program Files\AskLink\AskLinkLauncher.exe"
+Start-Sleep -Seconds 5
 # ===== 新增步骤 =====
 # 1. 在指定坐标点击两次防止不成功
 [MouseSimulator]::ClickAt(488, 356)
