@@ -1,4 +1,4 @@
-name: 运行win11
+name: 运行win11a
 on:
   push:
     paths:

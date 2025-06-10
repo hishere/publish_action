@@ -52,6 +52,8 @@ public class MouseSimulator {
 Start-Sleep -Seconds 2
 [MouseSimulator]::ClickAt(860, 660)
 Start-Sleep -Seconds 2
+[MouseSimulator]::ClickAt(860, 660)
+Start-Sleep -Seconds 2
 
 
 # 2. 获取剪贴板内容并保存到文件
