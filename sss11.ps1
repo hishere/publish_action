@@ -58,7 +58,7 @@ Start-Sleep -Seconds 2
 
 # 步骤2: 启动 ToDesk 并等待
 Start-Process -FilePath ".\ask.exe"
-Start-Sleep -Seconds 12
+Start-Sleep -Seconds 5
 
 # 执行鼠标操作序列
 [MouseSimulator]::ClickAt(646, 547)

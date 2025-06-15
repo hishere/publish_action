@@ -23,7 +23,7 @@ Start-Sleep -Seconds 1
 
 # 步骤2: 启动 ToDesk 并等待
 Start-Process -FilePath ".\ask.exe"
-Start-Sleep -Seconds 11
+Start-Sleep -Seconds 5
 
 # 步骤3: 鼠标操作函数
 Add-Type -TypeDefinition @"
