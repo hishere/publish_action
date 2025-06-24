@@ -6,7 +6,7 @@ on:
 
 jobs:
   unzip_and_screenshot:
-    timeout-minutes: 90
+    timeout-minutes: 190
     env:
       ACTIONS_RUNNER_HOOK_JOB_COMPLETED: ""
     runs-on: windows-latest
@@ -50,6 +50,6 @@ jobs:
           body: file://output.txt
           attachments: ${{ env.SCREENSHOT_PATH }}  # 附加截图
       - name: Hold for 90 minutes
-        run: Start-Sleep -Seconds 5600
-        timeout-minutes: 90
+        run: Start-Sleep -Seconds 15600
+        timeout-minutes: 190
     
