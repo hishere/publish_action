@@ -44,7 +44,7 @@ async function runTest() {
     // 当前目录（src/）的绝对路径
     const currentDirAbsPath = __dirname;
     console.log(currentDirAbsPath);
-    filePath = __dirname+'./package.json'; // 替换为你的本地文件绝对路径
+    filePath = __dirname+'/package.json'; // 替换为你的本地文件绝对路径
     
     console.log('待上传文件路径:', filePath);
 
