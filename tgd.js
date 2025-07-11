@@ -44,7 +44,7 @@ async function runTest() {
     console.log('待上传文件路径:', filePath);
 
     // 5. 执行文件上传（核心：通过sendKeys传入绝对路径）
-    await fileInput.sendKeys(filePath);
+    await fileInputByClass.sendKeys(filePath);
     console.log('文件上传操作已触发');
 
     // 6. 验证上传结果（根据页面实际的成功提示调整）
@@ -52,7 +52,7 @@ async function runTest() {
       // 等待上传成功提示出现（示例：假设成功后显示".upload-success"元素）
       const successMsg = await driver.wait(
         until.elementLocated(By.className('main-title')),
-        8000, // 上传可能较慢，适当延长等待时间
+        5000, // 上传可能较慢，适当延长等待时间
         '上传超时或失败'
       );
       console.log('文件上传成功！提示信息:', await successMsg.getText());
