@@ -18,12 +18,8 @@ const client = new TelegramClient(stringSession, apiId, apiHash, {
 (async () => {
     console.log("Loading interactive example...");
     await client.connect();
-    console.log("Connected to Telegram API");
-
-    const messageUrl="https://t.me/listenNice/408";
-    
-    const result = await client.getMessages(messageUrl);
-    console.log("re2222:"+result);
+    const result = await client.getMessages('https://t.me/coderNote', {limit: 1});
+    console.log(result);
 
         
 })();
