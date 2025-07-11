@@ -2,7 +2,7 @@ const readline = require("readline");
 const { StringSession } = require("telegram/sessions");
 const { TelegramClient, Api } = require("telegram");
 
-const apiId = process.env.TG_ID;
+const apiId = parseInt(process.env.TG_ID, 10);
 const apiHash = process.env.TG_HASH;
 const stringSession = new StringSession(process.env.TG_SESSION);
 
