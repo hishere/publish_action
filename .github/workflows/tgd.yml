@@ -12,7 +12,6 @@ jobs:
         uses: actions/setup-node@v2  #安装node.js
         with:
           node-version: '18'
-          cache: 'npm'
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
