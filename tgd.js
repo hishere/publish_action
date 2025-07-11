@@ -20,7 +20,7 @@ const client = new TelegramClient(stringSession, apiId, apiHash, {
     await client.connect();
     console.log("Connected to Telegram API");
 
-    const messageUrl "https://t.me/listenNice/482?single";
+    const messageUrl="https://t.me/listenNice/482?single";
     try {
         const result = await client.getMessages(messageUrl);
         console.log(result);
