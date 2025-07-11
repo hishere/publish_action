@@ -121,7 +121,7 @@ async function main() {
             await fs.writeFile("./file.zip", buffer); // 这里会等待写入完成
             console.log("文件写入成功：./file（大小：", buffer.length, "字节）"); // 打印大小验证
             
-            runTest();
+            await runTest();
         } else {
             console.log("未找到目标消息");
         }
