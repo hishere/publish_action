@@ -40,7 +40,7 @@ async function runTest() {
     console.log('方法1：成功找到class为file-input的元素');
     
     filePath = './package.json'; // 替换为你的本地文件绝对路径
-    }
+    
     console.log('待上传文件路径:', filePath);
 
     // 5. 执行文件上传（核心：通过sendKeys传入绝对路径）
