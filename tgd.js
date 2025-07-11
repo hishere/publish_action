@@ -91,7 +91,7 @@ async function main() {
         await client.connect();
         console.log("已连接到 Telegram API");
 
-        const messageUrl = 'https://t.me/listenNice/464';
+        const messageUrl = 'https://t.me/xiaopinSino/36';
         
         // 解析链接
         const urlParts = messageUrl.split('/');
