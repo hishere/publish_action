@@ -20,19 +20,10 @@ const client = new TelegramClient(stringSession, apiId, apiHash, {
     await client.connect();
     console.log("Connected to Telegram API");
 
-    const messageUrl = "<url id="d1o862qtuj3f25a10no0" type="url" status="failed" title="" wc="0">https://t.me/listenNice/482?single</url>";
+    const messageUrl "https://t.me/listenNice/482?single";
     try {
-        const parsedUrl = parseMessageUrl(messageUrl);
-        if (!parsedUrl.channel || !parsedUrl.messageId) {
-            throw new Error("Invalid message URL format");
-        }
-
-        const channel = parsedUrl.channel;
-        const message = await client.invoke(new Api.messages.GetMessages({
-            id: [new Api.InputMessageID({
-                id: parsedUrl.messageId
-            })]
-        }))
+        const result = await client.getMessages(messageUrl);
+        console.log(result);
 
         if (!message.length || !message[0].media) {
             throw new Error("Message does not contain a file or message not found");
