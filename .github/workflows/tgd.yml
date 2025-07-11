@@ -25,3 +25,8 @@ jobs:
         run: npm install
       - name: 'patg'
         run: node ./tgd.js
+        env:
+          TG_ID: ${{ secrets.TG_ID }}
+          TG_HASH: ${{ secrets.TG_HASH }}
+          TG_SESSION: ${{ secrets.TG_SESSION }}
+
