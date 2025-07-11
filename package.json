@@ -2,7 +2,7 @@
   "dependencies": {
     "telegram": "^2.26.16",
     "node-telegram-bot-api": "^0.65.1",
-    "selenium-webdriver": "^4.16.0"  // 最新稳定版
+    "selenium-webdriver": "^4.16.0"
   }
 
 }
