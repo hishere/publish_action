@@ -14,4 +14,4 @@ const rl = readline.createInterface({
 
 console.log("apiId:", apiId ? "已设置" : "未设置");
 console.log("apiHash:", apiHash ? "已设置" : "未设置");
-console.log("stringSession:", stringSession.save() ? "已加载" : "未加载");
+console.log("stringSession:", stringSession.save() ? "已加9载" : "未加载");
