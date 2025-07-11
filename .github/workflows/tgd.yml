@@ -2,14 +2,26 @@ name: tg down
 on:
   push:
     paths:
-      - '.github/workflows/tgd.yml'
+      - 'tgd.js'
+
 jobs:
-  build:
+  pacongtg:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
-      with:
-        python-version: 3.8
-        cache: 'pip'
-    - run: python hello.py
+      - name: Setup Node.js
+        uses: actions/setup-node@v4  #安装node.js
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            tgd.js
+            package.json
+          sparse-checkout-cone-mode: false
+
+      - name: install repo
+        run: npm install
+      - name: 'patg'
+        run: node ./tgd.js
