@@ -1,6 +1,8 @@
 // test.js
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
+const path = require('path');
+
 
 async function runTest() {
   // 配置 Chrome 无头模式
@@ -39,7 +41,10 @@ async function runTest() {
     );
     console.log('方法1：成功找到class为file-input的元素');
     
-    filePath = './package.json'; // 替换为你的本地文件绝对路径
+    // 当前目录（src/）的绝对路径
+    const currentDirAbsPath = __dirname;
+    console.log(currentDirAbsPath);
+    filePath = __dirname+'./package.json'; // 替换为你的本地文件绝对路径
     
     console.log('待上传文件路径:', filePath);
 
