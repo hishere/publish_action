@@ -20,10 +20,10 @@ const client = new TelegramClient(stringSession, apiId, apiHash, {
     await client.connect();
     console.log("Connected to Telegram API");
 
-    const messageUrl="https://t.me/listenNice/482?single";
+    const messageUrl="https://t.me/listenNice/408";
     try {
         const result = await client.getMessages(messageUrl);
-        console.log(result);
+        console.log("re2222:"+result);
 
         if (!message.length || !message[0].media) {
             throw new Error("Message does not contain a file or message not found");
