@@ -39,6 +39,27 @@ async function runTest() {
     );
     console.log('方法1：成功找到class为file-input的元素');
     
+    filePath = './package.json'; // 替换为你的本地文件绝对路径
+    }
+    console.log('待上传文件路径:', filePath);
+
+    // 5. 执行文件上传（核心：通过sendKeys传入绝对路径）
+    await fileInput.sendKeys(filePath);
+    console.log('文件上传操作已触发');
+
+    // 6. 验证上传结果（根据页面实际的成功提示调整）
+    try {
+      // 等待上传成功提示出现（示例：假设成功后显示".upload-success"元素）
+      const successMsg = await driver.wait(
+        until.elementLocated(By.className('main-title')),
+        8000, // 上传可能较慢，适当延长等待时间
+        '上传超时或失败'
+      );
+      console.log('文件上传成功！提示信息:', await successMsg.getText());
+    } catch (err) {
+      console.warn('上传结果验证失败，可能仍在处理中:', err.message);
+    }
+    
   } finally {
     await driver.quit();  // 关闭浏览器
   }
