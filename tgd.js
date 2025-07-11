@@ -30,15 +30,15 @@ async function runTest() {
     
     await driver.navigate().refresh();
     console.log('页面已刷新');
-    // 2. 截图（返回 Base64 编码的图片数据）
-    const screenshotBase64 = await driver.takeScreenshot();
-
-    // 3. 准备保存路径（创建 screenshots 目录，避免文件不存在错误）
-    const screenshotPath = "./screenshot.png";
-
-    // 5. 将 Base64 数据写入文件（Base64 解码后保存为 PNG）
-    await fs.writeFile(screenshotPath, screenshotBase64, 'base64');
-    console.log(`截图已保存至: ${screenshotPath}`);
+    
+    // 方法1：使用 By.className() 定位（仅适用于单个class名称，无空格）
+    const fileInputByClass = await driver.wait(
+      until.elementLocated(By.className('file-input')), // 直接传入class名称
+      10000,
+      '未找到class为file-input的元素（方法1）'
+    );
+    console.log('方法1：成功找到class为file-input的元素');
+    
   } finally {
     await driver.quit();  // 关闭浏览器
   }
