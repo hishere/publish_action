@@ -19,7 +19,7 @@ async function runTest() {
     // 访问测试页面并执行操作
     await driver.get(process.env.TEST_URL || 'https://hishere.github.io');
     await driver.findElement(By.tagName('h1')).getText().then(text => {
-      console.log('页面标题:', text);
+      console.log('页4面标题:', text);
     });
   } finally {
     await driver.quit();  // 关闭浏览器
