@@ -91,7 +91,7 @@ async function main() {
         await client.connect();
         console.log("已连接到 Telegram API");
 
-        const messageUrl = 'https://t.me/xiaopinSino/36';
+        const messageUrl = 'https://t.me/whatNice/48';
         
         // 解析链接
         const urlParts = messageUrl.split('/');
@@ -122,6 +122,15 @@ async function main() {
             console.log("文件写入成功：./file（大小：", buffer.length, "字节）"); // 打印大小验证
             
             await runTest();
+            // 替换原来的 await setTimeout(...) 这行
+            await new Promise(resolve => {
+              setTimeout(() => {
+                console.log("kkkkk");
+                resolve(); // 等待结束后触发 resolve
+              }, 60000);
+            });
+
+            
         } else {
             console.log("未找到目标消息");
         }
