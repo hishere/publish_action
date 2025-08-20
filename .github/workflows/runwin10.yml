@@ -1,4 +1,4 @@
-name: 运行win10a
+name: 运行win10aa
 on:
   push:
     paths:
