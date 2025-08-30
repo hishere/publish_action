@@ -1,0 +1,54 @@
+name: Install enshot on macOS
+on:
+  push:
+    paths:
+      - '.github/workflows/todesk3.yml'
+
+jobs:
+  unzip_and_screenshot:
+    timeout-minutes: 70
+    env:
+      ACTIONS_RUNNER_HOOK_JOB_COMPLETED: ""
+    runs-on: macos-latest  # 确保使用macOS运行器
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+          
+      - name: Take Screenshot (macOS)
+        shell: bash
+        run: |
+          # 创建截图目录
+          sleep 5
+          SCREENSHOT_DIR="$GITHUB_WORKSPACE/screenshots"
+          mkdir -p "$SCREENSHOT_DIR"
+          
+          
+          SCREENSHOT_PATH="$SCREENSHOT_DIR/screenshot.png"
+          
+          # 执行macOS原生截图命令
+          screencapture -x -C "$SCREENSHOT_PATH"  # -x禁用提示音，-C捕获光标
+          
+          # 验证截图存在
+          if [ -f "$SCREENSHOT_PATH" ]; then
+            echo "截图成功: $SCREENSHOT_PATH"
+            echo "SCREENSHOT_PATH=$SCREENSHOT_PATH" >> $GITHUB_ENV
+          else
+            echo "::error::截图失败，检查权限设置"
+            exit 1
+          fi
+
+
+      # 5. 通过邮件发送截图
+      - name: send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.qq.com
+          server_port: 465
+          secure: true
+          username: 1971902975@qq.com
+          password: otxoismbtaqucddg
+          from: github action
+          to: nooneb1998@foxmail.com
+          subject: 运行截图
+          body: "你好"
+          attachments: ${{ env.SCREENSHOT_PATH }}  # 附加截图

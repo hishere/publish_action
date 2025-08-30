@@ -1,0 +1,10 @@
+on:
+  schedule:
+    - cron: '1,15,31,46 * * * *' #每个小时的刷新4次,1天24x4得96
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 'refresh b4a app'
+        run: bash ./b4app.sh

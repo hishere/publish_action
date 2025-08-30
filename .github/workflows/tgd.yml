@@ -1,0 +1,31 @@
+name: tg down
+on:
+  push:
+    paths:
+      - 'tgd.js'
+
+jobs:
+  pacongtg:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v2  #安装node.js
+        with:
+          node-version: '18'
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            tgd.js
+            package.json
+          sparse-checkout-cone-mode: false
+
+      - name: install repo
+        run: npm install
+      - name: 'patg'
+        run: node ./tgd.js
+        env:
+          TG_ID: ${{ secrets.TG_ID }}
+          TG_HASH: ${{ secrets.TG_HASH }}
+          TG_SESSION: ${{ secrets.TG_SESSION }}
+

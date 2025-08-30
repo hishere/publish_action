@@ -1,0 +1,56 @@
+name: ueba
+on:
+  push:
+    paths:
+      - '.github/workflows/xkqz.yml'
+jobs:
+  run-app:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 1. VC++安装与精确等待
+      - name: Install VC++ 2010 Runtime
+        shell: powershell
+        run: |
+          $process = Start-Process "cpp.exe" -ArgumentList "/aiC" -PassThru
+          $process.WaitForExit()  # 关键：阻塞等待安装完成[3](@ref)
+          if ($process.ExitCode -ne 0) { exit 1 }  # 安装失败时终止
+
+      - name: Create D:\a directory
+        shell: powershell
+        run: New-Item -Path "D:\a" -ItemType Directory -Force
+
+      - name: Unpack ZIP to D:\a
+        shell: powershell
+        run: Expand-Archive -Path tool.zip -DestinationPath "D:\a" -Force
+
+      # 2. 应用启动+延时截图（整合步骤）
+      - name: Launch and Capture Screenshot
+        shell: powershell
+        run: |
+          # 启动应用（不阻塞后续命令）
+          $app = Start-Process "D:\a\UABE\AssetBundleExtractor.exe" -PassThru
+          
+          # 精确等待5秒[1](@ref)
+          Start-Sleep -Seconds 5
+          
+          # 创建截图目录
+          $screenshotDir = "D:\a\product"
+          New-Item -Path $screenshotDir -ItemType Directory -Force | Out-Null
+          
+          # 屏幕捕获
+          Add-Type -AssemblyName System.Windows.Forms
+          $screen = [System.Windows.Forms.Screen]::PrimaryScreen
+          $bmp = New-Object System.Drawing.Bitmap($screen.Bounds.Width, $screen.Bounds.Height)
+          $graphics = [System.Drawing.Graphics]::FromImage($bmp)
+          $graphics.CopyFromScreen(0, 0, 0, 0, $bmp.Size)
+          $bmp.Save("$screenshotDir\screenshot.png")
+          $graphics.Dispose()
+
+      - name: Upload Screenshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-screenshot
+          path: D:\a\product\screenshot.png

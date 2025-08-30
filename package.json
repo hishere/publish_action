@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "telegram": "^2.26.16",
+    "node-telegram-bot-api": "^0.65.1",
+    "selenium-webdriver": "^4.34.0"
+  }
+
+}

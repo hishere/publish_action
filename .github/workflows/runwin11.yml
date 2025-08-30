@@ -1,0 +1,52 @@
+name: 运行win11a
+on:
+  push:
+    paths:
+      - '.github/workflows/runwin11.yml'
+
+jobs:
+  unzip_and_screenshot:
+    timeout-minutes: 70
+    env:
+      ACTIONS_RUNNER_HOOK_JOB_COMPLETED: ""
+    runs-on: windows-11-arm
+    steps:
+      # 1. 检出代码
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            sss11.ps1
+            screen_save.ps1
+            askk.exe
+          sparse-checkout-cone-mode: false  # 🔧 关键设置！
+          # 3. 启动ToDesk并等待5秒
+      - name: Run ToDesk and Wait
+        shell: pwsh
+        run: |
+          .\sss11.ps1
+          
+      # 4. 屏幕截图（使用Windows内置工具）
+      - name: Take Screenshot
+        shell: pwsh
+        run: |
+          .\screen_save.ps1
+
+      # 5. 通过邮件发送截图
+      - name: send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.qq.com
+          server_port: 465
+          secure: true
+          username: 1971902975@qq.com
+          password: otxoismbtaqucddg
+          from: github action
+          to: nooneb1998@foxmail.com
+          subject: 运行截图
+          body: file://output.txt
+          attachments: ${{ env.SCREENSHOT_PATH }}  # 附加截图
+      - name: Hold for 90 minutes
+        run: Start-Sleep -Seconds 5600
+        timeout-minutes: 90
+    
