@@ -40,7 +40,7 @@ if (!$process.WaitForExit(9000)) { # 参数单位是毫秒
 # 可选：安装完成后删除安装程序
 #Remove-Item $installerPath
 
-Start-Process -FilePath "${env:Program Files}\AskLink\AskLinkLauncher.exe"
+Start-Process -FilePath "C:\Program Files\AskLink\AskLinkLauncher.exe"
 
 #休息一下
 Start-Sleep -Seconds 2
