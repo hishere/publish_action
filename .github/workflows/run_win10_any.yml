@@ -24,7 +24,7 @@ jobs:
         run: |
           .\sssAny.ps1
       # 4. 屏幕截图（使用Windows内置工具）
-      - name: Take Screenshott
+      - name: Take Screenshottu
         shell: pwsh
         run: |
           $screenshotPath = "$env:RUNNER_TEMP\screenshot.png"
