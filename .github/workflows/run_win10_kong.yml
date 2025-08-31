@@ -1,4 +1,4 @@
-name: 运行win10_kong23
+name: 运行win10LLK
 on:
   push:
     paths:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   unzip_and_screenshot:
-    timeout-minutes: 192
+    timeout-minutes: 190
     env:
       ACTIONS_RUNNER_HOOK_JOB_COMPLETED: ""
     runs-on: windows-latest

@@ -24,7 +24,7 @@ try {
 } catch {
     Write-Warning "模拟 Win+D 失败: $($_.Exception.Message)"
 }
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 1
 
 # 2. 下载并安装 AskLink
 $downloadUrl = "https://oss.asklink.com/updata/official-version/windows/AskLink_Full_v4.0.17.3_20250823_1949.exe"
@@ -45,13 +45,13 @@ Write-Host "正在执行静默安装..." -ForegroundColor Yellow
 $installProcess = Start-Process -FilePath $installerPath -ArgumentList "/VERYSILENT" -PassThru
 
 # 设置安装超时时间（单位：秒）
-$timeoutSeconds = 9
+$timeoutSeconds = 7
 $startTime = Get-Date
 $processExited = $false
 
 # 等待进程退出或超时
 while ($null -ne (Get-Process -Id $installProcess.Id -ErrorAction SilentlyContinue)) {
-    Start-Sleep -Seconds 2
+    Start-Sleep -Seconds 1
     $elapsedTime = (Get-Date) - $startTime
     if ($elapsedTime.TotalSeconds -gt $timeoutSeconds) {
         Write-Warning "安装进程超过 $timeoutSeconds 秒仍未退出，尝试继续执行后续操作。"
