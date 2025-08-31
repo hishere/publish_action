@@ -1,4 +1,4 @@
-name: 运行win10xk
+name: 运行win10_kong
 on:
   push:
     paths:
@@ -18,8 +18,8 @@ jobs:
             sss.ps1
             askk.exe
           sparse-checkout-cone-mode: false  # 🔧 关键设置！
-          # 3. 启动ToDesk并等待5秒
-      - name: Run ToDesk and Wait
+          # 3. 启动连连控并等待5秒
+      - name: Run kong and Wait
         shell: pwsh
         run: |
           .\sss.ps1
