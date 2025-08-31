@@ -1,3 +1,6 @@
+# AskLink 静默安装与自动化脚本
+# 日期: 2025-08-31
+
 # 1. 模拟 Win+D 显示桌面
 Add-Type -TypeDefinition @"
 using System;
@@ -15,7 +18,12 @@ public class KeyboardSimulator {
 }
 "@
 
-[KeyboardSimulator]::SendWinD()
+try {
+    [KeyboardSimulator]::SendWinD()
+    Write-Host "已模拟 Win+D 显示桌面。" -ForegroundColor Green
+} catch {
+    Write-Warning "模拟 Win+D 失败: $($_.Exception.Message)"
+}
 Start-Sleep -Seconds 2
 
 # 2. 下载并安装 AskLink
@@ -24,44 +32,83 @@ $installerPath = "$env:TEMP\asklink_installer.exe"
 
 # 下载安装包
 try {
+    Write-Host "正在下载 AskLink 安装包..." -ForegroundColor Yellow
     Invoke-WebRequest -Uri $downloadUrl -OutFile $installerPath -ErrorAction Stop
-    Write-Host "AskLink安装包下载完成。" -ForegroundColor Green
+    Write-Host "AskLink 安装包下载完成。" -ForegroundColor Green
 } catch {
     Write-Error "下载安装包失败: $($_.Exception.Message)"
     exit 1
 }
 
-# 执行静默安装
-$installProcess = Start-Process -FilePath $installerPath -ArgumentList "/VERYSILENT" -PassThru -Wait
-if ($installProcess.ExitCode -ne 0) {
-    Write-Warning "安装过程可能非正常退出 (退出代码: $($installProcess.ExitCode))"
+# 执行静默安装（使用超时控制）
+Write-Host "正在执行静默安装..." -ForegroundColor Yellow
+$installProcess = Start-Process -FilePath $installerPath -ArgumentList "/VERYSILENT" -PassThru
+
+# 设置安装超时时间（单位：秒）
+$timeoutSeconds = 9
+$startTime = Get-Date
+$processExited = $false
+
+# 等待进程退出或超时
+while ($null -ne (Get-Process -Id $installProcess.Id -ErrorAction SilentlyContinue)) {
+    Start-Sleep -Seconds 2
+    $elapsedTime = (Get-Date) - $startTime
+    if ($elapsedTime.TotalSeconds -gt $timeoutSeconds) {
+        Write-Warning "安装进程超过 $timeoutSeconds 秒仍未退出，尝试继续执行后续操作。"
+        break
+    }
+}
+
+# 检查安装结果（通过验证安装目录是否存在）
+$possibleInstallPaths = @(
+    "${env:ProgramFiles}\AskLink",
+    "${env:ProgramFiles(x86)}\AskLink"
+)
+
+$installVerified = $false
+foreach ($path in $possibleInstallPaths) {
+    if (Test-Path $path) {
+        Write-Host "✅ 验证安装成功: 找到安装目录 $path" -ForegroundColor Green
+        $installVerified = $true
+        break
+    }
+}
+
+if (-not $installVerified) {
+    Write-Warning "未找到 AskLink 安装目录，安装可能未成功完成。"
 }
 
 # 清理安装包
 Remove-Item $installerPath -Force -ErrorAction SilentlyContinue
+Write-Host "安装包已清理。" -ForegroundColor Green
 
-# 尝试启动程序 (避免硬编码路径)
+# 3. 尝试启动程序
 $possiblePaths = @(
     "${env:ProgramFiles}\AskLink\AskLinkLauncher.exe",
     "${env:ProgramFiles(x86)}\AskLink\AskLinkLauncher.exe"
 )
+
 $launcherFound = $false
 foreach ($path in $possiblePaths) {
     if (Test-Path $path) {
-        Start-Process -FilePath $path
-        Write-Host "已启动 AskLinkLauncher." -ForegroundColor Green
+        Write-Host "启动 AskLinkLauncher: $path" -ForegroundColor Yellow
+        $launchProcess = Start-Process -FilePath $path -PassThru
         $launcherFound = $true
         break
     }
 }
+
 if (-not $launcherFound) {
-    Write-Warning "未在默认路径找到 AskLinkLauncher.exe，请确保安装成功并手动启动程序。"
-    exit 1
+    Write-Warning "未在默认路径找到 AskLinkLauncher.exe。请手动启动程序后再继续操作，或检查安装是否成功。"
+    # 此处可以选择退出脚本 (exit 1) 或继续尝试执行后续鼠标操作
+    # exit 1
 }
 
-Start-Sleep -Seconds 5  # 等待程序启动
+# 给予程序足够的启动时间
+Write-Host "等待程序启动..." -ForegroundColor Yellow
+Start-Sleep -Seconds 5
 
-# 3. 鼠标操作函数
+# 4. 鼠标操作函数
 Add-Type -TypeDefinition @"
 using System;
 using System.Runtime.InteropServices;
@@ -95,7 +142,8 @@ function DoubleClick-AtPoint {
     Start-Sleep -Seconds 1
 }
 
-# 4. 执行鼠标操作并获取剪贴板内容
+# 5. 执行鼠标操作并获取剪贴板内容
+Write-Host "执行鼠标操作..." -ForegroundColor Yellow
 DoubleClick-AtPoint -x 489 -y 356
 Start-Sleep -Seconds 2
 
