@@ -14,6 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: do something
+        id: get-id
         shell: bash
         run: |    
           brew install --cask anydesk    
@@ -72,7 +73,7 @@ jobs:
           body: "你好"
           attachments: ${{ env.SCREENSHOT_PATH }}  # 附加截图
       - name: Hold for 190 minutes
-        run: Start-Sleep -Seconds 15600
+        run: sleep 15600
         timeout-minutes: 190          
         
         
