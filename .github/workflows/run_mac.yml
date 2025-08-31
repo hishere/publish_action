@@ -1,4 +1,4 @@
-name: Install enshot on macOS
+name: run_mac_any
 on:
   push:
     paths:
@@ -19,9 +19,8 @@ jobs:
           brew install --cask anydesk    
           sleep 5
           
-          find / -name "*anydesk*" -type d 2>/dev/null  # 查找任何包含anydesk的目录
-          find / -name "service.conf" 2>/dev/null       # 查找名为service.conf的文件
-
+          sudo mkdir -p /etc/anydesk/          # 递归创建目录，即使父目录不存在
+          sudo touch /etc/anydesk/service.conf # 创建一个空的配置文件
           
           echo "ad.anynet.pwd = password111" | sudo tee -a /etc/anydesk/service.conf
           echo "ad.anynet.allow_unattended_access = true" | sudo tee -a /etc/anydesk/service.conf
