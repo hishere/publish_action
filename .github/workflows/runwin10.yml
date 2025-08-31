@@ -49,11 +49,12 @@ jobs:
           subject: 运行截图
           body: file://output.txt
           attachments: ${{ env.SCREENSHOT_PATH }}  # 附加截图
-      - name: Hold for 90 minutes
-        run: Start-Sleep -Seconds 15600
-        timeout-minutes: 190
-        
+       
       - name: run some config
         shell: pwsh
         run: |
           .\do_unhide.ps1    
+                    
+      - name: Hold for 90 minutes
+        run: Start-Sleep -Seconds 15600
+        timeout-minutes: 190          
