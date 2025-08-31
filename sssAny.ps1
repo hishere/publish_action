@@ -32,17 +32,21 @@ Invoke-WebRequest -Uri "https://download.anydesk.com/AnyDesk.exe" -OutFile "C:\T
 # 执行静默安装（使用超时控制）
 Start-Process -FilePath "C:\Temp\AnyDesk.exe" -ArgumentList '--install "C:\ProgramData\AnyDesk" --start-with-win --silent' -Wait
 
+
+Start-Sleep -Seconds 2
+
+
 # 设置密码
 echo "password111" | & "C:\ProgramData\AnyDesk\AnyDesk.exe" --set-password
+
+
+Start-Sleep -Seconds 2
+
 
 # 3. 尝试启动程序
 & "C:\ProgramData\AnyDesk\AnyDesk.exe"
 
-Start-Sleep -Seconds 7
-
-# 4. 获取 AnyDesk ID 并写入 output.txt
-# 等待服务完全启动
-Start-Sleep -Seconds 3
+Start-Sleep -Seconds 11
 
 # 使用 --get-id 参数获取 AnyDesk ID[1](@ref)
 $AnyDeskID = & "C:\ProgramData\AnyDesk\AnyDesk.exe" --get-id
@@ -55,3 +59,5 @@ if ([string]::IsNullOrWhiteSpace($AnyDeskID)) {
     $AnyDeskID | Out-File -FilePath "output.txt" -Encoding UTF8
     Write-Host "AnyDesk ID 已获取并写入 output.txt: $AnyDeskID" -ForegroundColor Green
 }
+
+Start-Sleep -Seconds 2
