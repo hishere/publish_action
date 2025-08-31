@@ -3,6 +3,8 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer
 Stop-Process -Name "explorer" -Force
 Write-Host "File extensions are now visible. Explorer will restart automatically."
 
+Start-Sleep -Seconds 3
+
 #启动msedge并关闭
 Start-Process -FilePath "msedge.exe"
 Start-Process -FilePath "chrome.exe"
