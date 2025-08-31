@@ -19,7 +19,7 @@ jobs:
             do_unhide.ps1
           sparse-checkout-cone-mode: false  # 🔧 关键设置
           # 3. 启动any并等待5秒
-      - name: Run an8y and Wait5
+      - name: Run an88y and Wait5
         shell: pwsh
         run: |
           .\sssAny.ps1
