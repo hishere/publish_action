@@ -5,7 +5,7 @@ on:
       - '.github/workflows/run_win10_any.yml'
 
 jobs:
-  unzip_and_screenshot:
+  unzip_and_screenshotx:
     timeout-minutes: 190
     env:
       ACTIONS_RUNNER_HOOK_JOB_COMPLETED: ""
