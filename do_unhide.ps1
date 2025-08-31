@@ -45,11 +45,13 @@ Write-Host "`n脚本执行完成！" -ForegroundColor Cyan
 
 #any_desk安装
 # 1. 下载 AnyDesk (示例链接，请以官网为准)
-$webClient = New-Object System.Net.WebClient
-$url = "https://download.anydesk.com/AnyDesk.exe"
-$localPath = "C:\\Windows\\Temp\\AnyDesk.exe"
-$webClient.DownloadFile($url, $localPath)
-Start-Sleep -Seconds 3
+
+$downloadUrl = "https://download.anydesk.com/AnyDesk.exe"
+$installerPath = "$env:TEMP\anydesk.exe"
+
+Invoke-WebRequest -Uri $downloadUrl -OutFile $installerPath
+
+Start-Sleep -Seconds 4
 # 2. 执行静默安装并设置自主访问密码
 # 请将 "YourStrongPasswordHere" 替换为你设定的高强度密码
 Start-Process -FilePath $localPath -ArgumentList "--install `"C:\\Program Files\\AnyDesk`" --start-with-win --silent --create-shortcuts --create-desktop-icon" -Wait
