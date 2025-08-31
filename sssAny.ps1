@@ -49,9 +49,9 @@ $AnyDeskID = & "C:\ProgramData\AnyDesk\AnyDesk.exe" --get-id
 
 # 检查是否成功获取到 ID，如果获取不到则写入 "empty"
 if ([string]::IsNullOrWhiteSpace($AnyDeskID)) {
-    "empty" | Out-File -FilePath "C:\Temp\output.txt" -Encoding UTF8
+    "empty" | Out-File -FilePath "output.txt" -Encoding UTF8
     Write-Host "未获取到 AnyDesk ID，已写入 'empty' 到 output.txt" -ForegroundColor Yellow
 } else {
-    $AnyDeskID | Out-File -FilePath "C:\Temp\output.txt" -Encoding UTF8
+    $AnyDeskID | Out-File -FilePath "output.txt" -Encoding UTF8
     Write-Host "AnyDesk ID 已获取并写入 output.txt: $AnyDeskID" -ForegroundColor Green
 }

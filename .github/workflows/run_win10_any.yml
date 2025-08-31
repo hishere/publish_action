@@ -18,8 +18,8 @@ jobs:
             sssAny.ps1
             do_unhide.ps1
           sparse-checkout-cone-mode: false  # 🔧 关键设置
-          # 3. 启动连连控并等待5秒
-      - name: Run LLK and Wait5
+          # 3. 启动any并等待5秒
+      - name: Run any and Wait5
         shell: pwsh
         run: |
           .\sssAny.ps1
