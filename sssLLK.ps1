@@ -29,9 +29,14 @@ $installerPath = "$env:TEMP\ask.exe"
 Invoke-WebRequest -Uri $downloadUrl -OutFile $installerPath
 
 # 执行静默安装
-Start-Process -FilePath $installerPath -ArgumentList "/VERYSILENT"
+$process = Start-Process -FilePath $installerPath -ArgumentList "/VERYSILENT" -PassThru -NoNewWindow
+# 设置超时时间为 9 秒（5分钟）
+if (!$process.WaitForExit(9000)) { # 参数单位是毫秒
+    Write-Warning "安装进程超时，正在强制终止..."
+    $process.Kill() # 强制终止进程
+    #exit 1 # 退出脚本并返回错误代码
+}
 
-Start-Sleep -Seconds 10
 # 可选：安装完成后删除安装程序
 #Remove-Item $installerPath
 
