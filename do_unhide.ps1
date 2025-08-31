@@ -15,21 +15,21 @@ $firefoxPath = "C:\Program Files\Mozilla Firefox\firefox.exe"
 $WshShell = New-Object -ComObject WScript.Shell
 
 # Edge 跳过欢迎页
-$edgeShortcut = $WshShell.CreateShortcut((Join-Path $desktop "Edge - 跳过欢迎页.lnk"))
+$edgeShortcut = $WshShell.CreateShortcut((Join-Path $desktop "Edge.lnk"))
 $edgeShortcut.TargetPath = $edgePath
 $edgeShortcut.Arguments = "--no-first-run"
 $edgeShortcut.IconLocation = $edgePath
 $edgeShortcut.Save()
 
 # Chrome 跳过欢迎页
-$chromeShortcut = $WshShell.CreateShortcut((Join-Path $desktop "Chrome - 跳过欢迎页.lnk"))
+$chromeShortcut = $WshShell.CreateShortcut((Join-Path $desktop "Chrome.lnk"))
 $chromeShortcut.TargetPath = $chromePath
 $chromeShortcut.Arguments = "--no-first-run"
 $chromeShortcut.IconLocation = $chromePath
 $chromeShortcut.Save()
 
 # Firefox 跳过欢迎页
-$firefoxShortcut = $WshShell.CreateShortcut((Join-Path $desktop "Firefox - 跳过欢迎页.lnk"))
+$firefoxShortcut = $WshShell.CreateShortcut((Join-Path $desktop "Firefox.lnk"))
 $firefoxShortcut.TargetPath = $firefoxPath
 $firefoxShortcut.Arguments = "-no-remote -new-instance -url about:blank"
 $firefoxShortcut.IconLocation = $firefoxPath
