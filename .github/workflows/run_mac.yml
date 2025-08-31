@@ -1,4 +1,4 @@
-name: Install enshot on macOS
+name: run_mac_AnyDesk
 on:
   push:
     paths:
@@ -17,7 +17,12 @@ jobs:
         shell: bash
         run: |    
           brew install --cask anydesk    
-          sleep 5  
+          sleep 5
+          echo "ad.anynet.pwd = password111" | sudo tee -a /etc/anydesk/service.conf
+          echo "ad.anynet.allow_unattended_access = true" | sudo tee -a /etc/anydesk/service.conf
+          sleep 2
+          open -a AnyDesk
+  
       - name: Take Screenshot (macOS)
         shell: bash
         run: |
