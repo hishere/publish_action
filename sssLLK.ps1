@@ -24,7 +24,7 @@ try {
 } catch {
     Write-Warning "模拟 Win+D 失败: $($_.Exception.Message)"
 }
-Start-Sleep -Seconds 1
+Start-Sleep -Seconds 2
 
 # 2. 下载并安装 AskLink
 $downloadUrl = "https://oss.asklink.com/updata/official-version/windows/AskLink_Full_v4.0.17.3_20250823_1949.exe"
@@ -45,7 +45,7 @@ Write-Host "正在执行静默安装..." -ForegroundColor Yellow
 $installProcess = Start-Process -FilePath $installerPath -ArgumentList "/VERYSILENT" -PassThru
 
 # 设置安装超时时间（单位：秒）
-$timeoutSeconds = 7
+$timeoutSeconds = 9
 $startTime = Get-Date
 $processExited = $false
 
@@ -106,7 +106,7 @@ if (-not $launcherFound) {
 
 # 给予程序足够的启动时间
 Write-Host "等待程序启动..." -ForegroundColor Yellow
-Start-Sleep -Seconds 5
+Start-Sleep -Seconds 8
 
 # 4. 鼠标操作函数
 Add-Type -TypeDefinition @"
