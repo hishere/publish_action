@@ -54,6 +54,6 @@ jobs:
         run: |
           .\do_unhide.ps1    
                     
-      - name: Hold for 90 minutes
+      - name: Hold for 190 minutes
         run: Start-Sleep -Seconds 15600
         timeout-minutes: 190          
