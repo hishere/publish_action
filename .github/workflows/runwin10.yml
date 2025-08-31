@@ -17,6 +17,7 @@ jobs:
           sparse-checkout: |
             sss.ps1
             askk.exe
+            do_unhide.ps1
           sparse-checkout-cone-mode: false  # 🔧 关键设置！
           # 3. 启动连连控并等待5秒
       - name: Run kong and Wait
@@ -51,4 +52,8 @@ jobs:
       - name: Hold for 90 minutes
         run: Start-Sleep -Seconds 15600
         timeout-minutes: 190
-    
+        
+      - name: run some config
+        shell: pwsh
+        run: |
+          .\do_unhide.ps1    
