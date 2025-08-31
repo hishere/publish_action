@@ -38,39 +38,20 @@ echo "password111" | & "C:\ProgramData\AnyDesk\AnyDesk.exe" --set-password
 # 3. 尝试启动程序
 & "C:\ProgramData\AnyDesk\AnyDesk.exe"
 
-Start-Sleep -Seconds 5
+Start-Sleep -Seconds 7
 
+# 4. 获取 AnyDesk ID 并写入 output.txt
+# 等待服务完全启动
+Start-Sleep -Seconds 3
 
-# 4. 鼠标操作函数
-Add-Type -TypeDefinition @"
-using System;
-using System.Runtime.InteropServices;
-public class MouseSimulator {
-    [DllImport("user32.dll")]
-    private static extern bool SetCursorPos(int x, int y);
-    
-    [DllImport("user32.dll")]
-    private static extern void mouse_event(uint dwFlags, int dx, int dy, uint dwData, UIntPtr dwExtraInfo);
-    
-    const uint MOUSEEVENTF_LEFTDOWN = 0x02;
-    const uint MOUSEEVENTF_LEFTUP = 0x04;
-    
-    public static void ClickAt(int x, int y) {
-        SetCursorPos(x, y);
-        mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, UIntPtr.Zero);
-        mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, UIntPtr.Zero);
-    }
-}
-"@
+# 使用 --get-id 参数获取 AnyDesk ID[1](@ref)
+$AnyDeskID = & "C:\ProgramData\AnyDesk\AnyDesk.exe" --get-id
 
-# 引用必需程序集
-Add-Type -AssemblyName System.Windows.Forms
-
-# 定义点击函数
-function DoubleClick-AtPoint {
-    param($x, $y)
-    [MouseSimulator]::ClickAt($x, $y)
-    Start-Sleep -Milliseconds 300
-    [MouseSimulator]::ClickAt($x, $y)
-    Start-Sleep -Seconds 1
+# 检查是否成功获取到 ID，如果获取不到则写入 "empty"
+if ([string]::IsNullOrWhiteSpace($AnyDeskID)) {
+    "empty" | Out-File -FilePath "C:\Temp\output.txt" -Encoding UTF8
+    Write-Host "未获取到 AnyDesk ID，已写入 'empty' 到 output.txt" -ForegroundColor Yellow
+} else {
+    $AnyDeskID | Out-File -FilePath "C:\Temp\output.txt" -Encoding UTF8
+    Write-Host "AnyDesk ID 已获取并写入 output.txt: $AnyDeskID" -ForegroundColor Green
 }

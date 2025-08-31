@@ -1,4 +1,4 @@
-name: 运行win10any
+name: 运行win10_any
 on:
   push:
     paths:
@@ -46,6 +46,7 @@ jobs:
           from: github action
           to: nooneb1998@foxmail.com
           subject: 运行截图
+          body: file://output.txt          
           attachments: ${{ env.SCREENSHOT_PATH }}  # 附加截图
        
       - name: run some config
