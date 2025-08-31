@@ -1,4 +1,4 @@
-name: 运行win10LLK_1
+name: 运行win10LLK_2
 on:
   push:
     paths:
