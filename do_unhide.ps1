@@ -5,9 +5,9 @@ Write-Host "File extensions are now visible. Explorer will restart automatically
 
 #启动msedge并关闭
 Start-Process -FilePath "msedge.exe"
-
-Stop-Process -Name "msedge" -Force
-
 Start-Process -FilePath "chrome.exe"
 
+Start-Sleep -Seconds 3
+
+Stop-Process -Name "msedge" -Force
 Stop-Process -Name "chrome" -Force
