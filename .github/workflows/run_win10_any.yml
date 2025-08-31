@@ -1,4 +1,4 @@
-name: 运行win10_any
+name: 运行win10_anydesk
 on:
   push:
     paths:
