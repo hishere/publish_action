@@ -29,8 +29,9 @@ $installerPath = "$env:TEMP\ask.exe"
 Invoke-WebRequest -Uri $downloadUrl -OutFile $installerPath
 
 # 执行静默安装
-Start-Process -FilePath $installerPath -ArgumentList "/VERYSILENT" -Wait
+Start-Process -FilePath $installerPath -ArgumentList "/VERYSILENT"
 
+Start-Sleep -Seconds 10
 # 可选：安装完成后删除安装程序
 #Remove-Item $installerPath
 
