@@ -1,4 +1,4 @@
-name: 运行win10_kong2
+name: 运行win10_kong2x
 on:
   push:
     paths:

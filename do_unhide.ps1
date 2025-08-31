@@ -17,14 +17,14 @@ if (-not (Test-Path $chromePath)) {
 
 # 方法1: 使用超时参数立即退出
 Write-Host "方法1: 使用超时参数启动无头Chrome并立即关闭..." -ForegroundColor Yellow
-& $chromePath --headless=new --disable-gpu --no-first-run --timeout=1 --disable-dev-shm-usage about:blank
+& $chromePath --headless=new --disable-gpu --timeout=1 --disable-dev-shm-usage about:blank
 
 # 添加短暂延迟以确保进程完全退出
 Start-Sleep -Milliseconds 500
 
 # 方法2: 启动后立即强制终止进程
 Write-Host "`n方法2: 启动无头Chrome后立即强制关闭..." -ForegroundColor Yellow
-$process = Start-Process -FilePath $chromePath -ArgumentList "--headless=new --disable-gpu --disable-dev-shm-usage about:blank" -PassThru
+$process = Start-Process -FilePath $chromePath -ArgumentList " --disable-gpu --disable-dev-shm-usage about:blank" -PassThru
 Start-Sleep -Seconds 1
 if (-not $process.HasExited) {
     $process | Stop-Process -Force
@@ -41,18 +41,3 @@ if ($chromeProcesses) {
 }
 
 Write-Host "`n脚本执行完成！" -ForegroundColor Cyan
-
-
-#any_desk安装
-# 1. 下载 AnyDesk (示例链接，请以官网为准)
-
-$downloadUrl = "https://download.anydesk.com/AnyDesk.exe"
-$installerPath = "$env:TEMP\anydesk.exe"
-
-Invoke-WebRequest -Uri $downloadUrl -OutFile $installerPath
-
-Start-Sleep -Seconds 4
-# 2. 执行静默安装并设置自主访问密码
-# 请将 "YourStrongPasswordHere" 替换为你设定的高强度密码
-Start-Process -FilePath $localPath -ArgumentList "--install `"C:\\Program Files\\AnyDesk`" --start-with-win --silent --create-shortcuts --create-desktop-icon" -Wait
-Start-Process -FilePath "C:\\Program Files\\AnyDesk\\AnyDesk.exe" -ArgumentList "--set-password `"YourStrongPasswordHere`"" -Wait
