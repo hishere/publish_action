@@ -26,6 +26,8 @@ jobs:
           echo "ad.anynet.allow_unattended_access = true" | sudo tee -a /etc/anydesk/service.conf
           sleep 2
           open -a AnyDesk
+          sleep 5
+          /Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id
   
       - name: Take Screenshot (macOS)
         shell: bash
