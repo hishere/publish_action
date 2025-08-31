@@ -27,8 +27,12 @@ jobs:
           sleep 2
           open -a AnyDesk
           sleep 5
-          /Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id
-  
+          # 运行 AnyDesk 命令获取 ID，并去除可能的换行符
+          ANYDESK_ID=$(/Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id | tr -d '\n')
+          # 将获取到的 ID 设置为输出变量，名称为 'anydesk_id'
+          echo "::set-output name=anydesk_id::$ANYDESK_ID"
+          # 同时也可以将其设置为环境变量，便于步骤内使用
+          echo "ANYDESK_ID=$ANYDESK_ID" >> $GITHUB_ENV
       - name: Take Screenshot (macOS)
         shell: bash
         run: |
@@ -64,6 +68,11 @@ jobs:
           password: otxoismbtaqucddg
           from: github action
           to: nooneb1998@foxmail.com
-          subject: 运行截图
+          subject: 当前设备的 AnyDesk ID - ${{ steps.get-id.outputs.anydesk_id }}
           body: "你好"
           attachments: ${{ env.SCREENSHOT_PATH }}  # 附加截图
+      - name: Hold for 190 minutes
+        run: Start-Sleep -Seconds 15600
+        timeout-minutes: 190          
+        
+        
