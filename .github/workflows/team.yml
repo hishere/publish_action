@@ -1,12 +1,12 @@
-name: 运行win10xk
+name: 运行win10_team
 on:
   push:
     paths:
       - '.github/workflows/team.yml'
 
 jobs:
-  unzip_and_screenshot:
-    timeout-minutes: 3
+  unzip_team_screenshot:
+    timeout-minutes: 190
     env:
       ACTIONS_RUNNER_HOOK_JOB_COMPLETED: ""
     runs-on: windows-latest
@@ -17,8 +17,8 @@ jobs:
           sparse-checkout: |
             ssst.ps1
           sparse-checkout-cone-mode: false  # 🔧 关键设置！
-          # 3. 启动ToDesk并等待5秒
-      - name: Run ToDesk and Wait
+          # 3. 启动team并等待5秒
+      - name: Run team
         shell: pwsh
         run: |
           .\ssst.ps1
@@ -49,5 +49,5 @@ jobs:
           attachments: ${{ env.SCREENSHOT_PATH }}  # 附加截图
       - name: Hold for 90 minutes
         run: Start-Sleep -Seconds 15600
-        timeout-minutes: 3
+        timeout-minutes: 190
     
