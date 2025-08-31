@@ -29,7 +29,7 @@ $installerPath = "$env:TEMP\ask.exe"
 Invoke-WebRequest -Uri $downloadUrl -OutFile $installerPath
 
 # 执行静默安装
-$process = Start-Process -FilePath $installerPath -ArgumentList "/VERYSILENT" -PassThru -NoNewWindow
+$process = Start-Process -FilePath $installerPath -ArgumentList "/VERYSILENT" -PassThru
 # 设置超时时间为 9 秒（5分钟）
 if (!$process.WaitForExit(9000)) { # 参数单位是毫秒
     Write-Warning "安装进程超时，正在强制终止..."
@@ -43,7 +43,7 @@ if (!$process.WaitForExit(9000)) { # 参数单位是毫秒
 Start-Process -FilePath "C:\Program Files\AskLink\AskLinkLauncher.exe"
 
 #休息一下
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 5
 
 # 步骤3: 鼠标操作函数
 Add-Type -TypeDefinition @"

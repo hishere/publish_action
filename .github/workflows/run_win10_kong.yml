@@ -6,7 +6,7 @@ on:
 
 jobs:
   unzip_and_screenshot:
-    timeout-minutes: 190
+    timeout-minutes: 191
     env:
       ACTIONS_RUNNER_HOOK_JOB_COMPLETED: ""
     runs-on: windows-latest
