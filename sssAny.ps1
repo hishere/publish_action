@@ -33,24 +33,24 @@ Invoke-WebRequest -Uri "https://download.anydesk.com/AnyDesk.exe" -OutFile "C:\T
 Start-Process -FilePath "C:\Temp\AnyDesk.exe" -ArgumentList '--install "C:\ProgramData\AnyDesk" --start-with-win --silent' -Wait
 
 
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 1
 
 
 # 设置密码
 echo "password111" | & "C:\ProgramData\AnyDesk\AnyDesk.exe" --set-password
 
 
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 1
 
 
 # 3. 尝试启动程序
-& "C:\ProgramData\AnyDesk\AnyDesk.exe"
+Start-Process -FilePath "C:\ProgramData\AnyDesk\AnyDesk.exe" -PassThru
 
-Start-Sleep -Seconds 11
+Start-Sleep -Seconds 14
 
 # 使用 --get-id 参数获取 AnyDesk ID[1](@ref)
-$AnyDeskID = & "C:\ProgramData\AnyDesk\AnyDesk.exe" --get-id
-
+#$AnyDeskID = & "C:\ProgramData\AnyDesk\AnyDesk.exe" --get-id
+$AnyDeskID="xxx"
 # 检查是否成功获取到 ID，如果获取不到则写入 "empty"
 if ([string]::IsNullOrWhiteSpace($AnyDeskID)) {
     "empty" | Out-File -FilePath "output.txt" -Encoding UTF8
@@ -60,4 +60,4 @@ if ([string]::IsNullOrWhiteSpace($AnyDeskID)) {
     Write-Host "AnyDesk ID 已获取并写入 output.txt: $AnyDeskID" -ForegroundColor Green
 }
 
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 1
