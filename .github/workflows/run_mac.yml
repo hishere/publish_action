@@ -21,8 +21,13 @@ jobs:
           sleep 5
                 
           sleep 2
-          open /Applications/TeamViewer.app
+          open -a TeamViewer
+
           sleep 15
+          brew install cliclick
+          cliclick c:664,559
+          sleep 3
+
         
           # 运行 AnyDesk 命令获取 ID，并去除可能的换行符
       - name: Take Screenshot (macOS)
@@ -31,8 +36,7 @@ jobs:
           # 创建截图目录
           sleep 5
           SCREENSHOT_DIR="$GITHUB_WORKSPACE/screenshots"
-          mkdir -p "$SCREENSHOT_DIR"
-          
+          mkdir -p "$SCREENSHOT_DIR"          
           
           SCREENSHOT_PATH="$SCREENSHOT_DIR/screenshot.png"
           
