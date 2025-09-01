@@ -18,10 +18,12 @@ jobs:
         shell: bash
         run: |    
           brew install --cask anydesk    
-          sleep 5
+          sleep 3
                 
           open /System/Library/PreferencePanes/Security.prefPane
-          sleep 5
+          sleep 3
+          cliclick c:863,230
+          sleep 2
 
 
       - name: Take Screenshot (macOS)
