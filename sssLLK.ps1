@@ -88,7 +88,7 @@ if (Test-Path $launcherPath) {
 
 # 给予程序足够的启动时间
 Write-Host "等待程序启动..." -ForegroundColor Yellow
-Start-Sleep -Seconds 10
+Start-Sleep -Seconds 15
 
 # 4. 鼠标操作函数
 Add-Type -TypeDefinition @"
