@@ -26,6 +26,9 @@ jobs:
           sleep 3
           cliclick c:863,600
           sleep 2
+          cliclick c:470,180
+          sleep 2
+
 
 
       - name: Take Screenshot (macOS)
