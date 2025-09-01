@@ -25,10 +25,11 @@ jobs:
           
           echo "ad.anynet.pwd = password111" | sudo tee -a /etc/anydesk/service.conf
           echo "ad.anynet.allow_unattended_access = true" | sudo tee -a /etc/anydesk/service.conf
-          sudo /Applications/AnyDesk.app/Contents/MacOS/AnyDesk --set-password "password111"
           sleep 2
           open -a AnyDesk
           sleep 5
+          sudo /Applications/AnyDesk.app/Contents/MacOS/AnyDesk --set-password "password111"
+          
           # 运行 AnyDesk 命令获取 ID，并去除可能的换行符
           ANYDESK_ID=$(/Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id | tr -d '\n')
           # 将获取到的 ID 设置为输出变量，名称为 'anydesk_id'
