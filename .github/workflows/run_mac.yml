@@ -20,14 +20,10 @@ jobs:
           brew install --cask anydesk    
           sleep 5
           
-          sudo mkdir -p /etc/anydesk/          # 递归创建目录，即使父目录不存在
-          sudo touch /etc/anydesk/service.conf # 创建一个空的配置文件
-          sudo /Applications/AnyDesk.app/Contents/MacOS/AnyDesk --set-password "password111"
-          
-          sleep 2
           open -a AnyDesk
-          sleep 5
-          
+          sleep 10
+          echo "password111" | sudo /Applications/AnyDesk.app/Contents/MacOS/AnyDesk --set-password
+                
           # 运行 AnyDesk 命令获取 ID，并去除可能的换行符
           ANYDESK_ID=$(/Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id | tr -d '\n')
           # 将获取到的 ID 设置为输出变量，名称为 'anydesk_id'
