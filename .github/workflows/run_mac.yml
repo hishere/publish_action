@@ -32,8 +32,11 @@ jobs:
           echo "ANYDESK_ID=$ANYDESK_ID" >> $GITHUB_ENV
           
           brew install cliclick
-          cliclick dc:619,237
           sleep 1
+          cliclick c:619,237
+          sleep 2
+          cliclick c:619,237
+          sleep 2
          # cliclick c:619,350
 
 
