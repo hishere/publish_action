@@ -17,26 +17,31 @@ jobs:
         id: get-id
         shell: bash
         run: |    
-          brew install --cask teamviewer    
+          brew install --cask anydesk    
           sleep 5
                 
-          sleep 2
-          open -a TeamViewer
-
-          sleep 15
-          brew install cliclick
-          cliclick c:664,559
-          sleep 3
-
-        
+          open -a AnyDesk
+          sleep 10
+          #echo "password111" | /Applications/AnyDesk.app/Contents/MacOS/AnyDesk --set-password
+                
           # 运行 AnyDesk 命令获取 ID，并去除可能的换行符
+          ANYDESK_ID=$(/Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id | tr -d '\n')
+          # 将获取到的 ID 设置为输出变量，名称为 'anydesk_id'
+          echo "::set-output name=anydesk_id::$ANYDESK_ID"
+          # 同时也可以将其设置为环境变量，便于步骤内使用
+          echo "ANYDESK_ID=$ANYDESK_ID" >> $GITHUB_ENV
+          
+          brew install cliclick
+          cliclick c:865,587
+          sleep 2
       - name: Take Screenshot (macOS)
         shell: bash
         run: |
           # 创建截图目录
           sleep 5
           SCREENSHOT_DIR="$GITHUB_WORKSPACE/screenshots"
-          mkdir -p "$SCREENSHOT_DIR"          
+          mkdir -p "$SCREENSHOT_DIR"
+          
           
           SCREENSHOT_PATH="$SCREENSHOT_DIR/screenshot.png"
           
