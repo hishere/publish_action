@@ -32,17 +32,9 @@ jobs:
           echo "ANYDESK_ID=$ANYDESK_ID" >> $GITHUB_ENV
           
           brew install cliclick
-          cliclick c:865,587
-          sleep 2
-          cliclick c:597,143
-          sleep 2
-          cliclick t:"password111"
-          sleep 1
-          cliclick kp:enter
-          sleep 1
-          cliclick t:"password111"
-          sleep 1
-          cliclick kp:enter
+          cliclick c:619,237
+         # cliclick c:619,350
+
 
       - name: Take Screenshot (macOS)
         shell: bash
