@@ -35,7 +35,7 @@ jobs:
           sleep 1
           cliclick c:619,237
           sleep 2
-          cliclick c:619,237
+          cliclick kp:enter
           sleep 2
          # cliclick c:619,350
 
