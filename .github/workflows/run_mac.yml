@@ -22,13 +22,11 @@ jobs:
           
           sudo mkdir -p /etc/anydesk/          # 递归创建目录，即使父目录不存在
           sudo touch /etc/anydesk/service.conf # 创建一个空的配置文件
+          sudo /Applications/AnyDesk.app/Contents/MacOS/AnyDesk --set-password "password111"
           
-          echo "ad.anynet.pwd = password111" | sudo tee -a /etc/anydesk/service.conf
-          echo "ad.anynet.allow_unattended_access = true" | sudo tee -a /etc/anydesk/service.conf
           sleep 2
           open -a AnyDesk
           sleep 5
-          sudo /Applications/AnyDesk.app/Contents/MacOS/AnyDesk --set-password "password111"
           
           # 运行 AnyDesk 命令获取 ID，并去除可能的换行符
           ANYDESK_ID=$(/Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id | tr -d '\n')
