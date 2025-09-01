@@ -36,6 +36,13 @@ jobs:
           sleep 2
           cliclick c:597,143
           sleep 2
+          cliclick t:"password111"
+          sleep 1
+          cliclick kp:enter
+          sleep 1
+          cliclick t:"password111"
+          sleep 1
+          cliclick kp:enter
 
       - name: Take Screenshot (macOS)
         shell: bash
