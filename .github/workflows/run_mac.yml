@@ -34,6 +34,9 @@ jobs:
           brew install cliclick
           cliclick c:865,587
           sleep 2
+          cliclick c:597,143
+          sleep 2
+
       - name: Take Screenshot (macOS)
         shell: bash
         run: |
