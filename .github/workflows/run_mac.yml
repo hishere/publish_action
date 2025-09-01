@@ -20,8 +20,8 @@ jobs:
           brew install --cask anydesk    
           sleep 5
                 
-          open "x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture"
-          sleep 3
+          open /System/Library/PreferencePanes/Security.prefPane
+          sleep 5
 
 
       - name: Take Screenshot (macOS)
