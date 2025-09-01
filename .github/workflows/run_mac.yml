@@ -22,7 +22,7 @@ jobs:
                 
           sleep 2
           open /Applications/TeamViewer.app
-          sleep 10
+          sleep 15
         
           # 运行 AnyDesk 命令获取 ID，并去除可能的换行符
       - name: Take Screenshot (macOS)
