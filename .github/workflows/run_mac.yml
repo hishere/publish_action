@@ -17,11 +17,11 @@ jobs:
         id: get-id
         shell: bash
         run: |    
-          brew install --cask asklink    
+          brew install --cask teamviewer    
           sleep 5
                 
           sleep 2
-          open -a AskLink
+          open /Applications/TeamViewer.app
           sleep 10
         
           # 运行 AnyDesk 命令获取 ID，并去除可能的换行符
