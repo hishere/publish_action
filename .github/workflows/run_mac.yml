@@ -25,7 +25,7 @@ jobs:
           
           echo "ad.anynet.pwd = password111" | sudo tee -a /etc/anydesk/service.conf
           echo "ad.anynet.allow_unattended_access = true" | sudo tee -a /etc/anydesk/service.conf
-          /Applications/AnyDesk.app/Contents/MacOS/AnyDesk --set-password "password111"
+          sudo /Applications/AnyDesk.app/Contents/MacOS/AnyDesk --set-password "password111"
           sleep 2
           open -a AnyDesk
           sleep 5
@@ -70,7 +70,7 @@ jobs:
           password: otxoismbtaqucddg
           from: github action
           to: nooneb1998@foxmail.com
-          subject: ${{ steps.get-id.outputs.anydesk_id }}
+          subject: id-${{ steps.get-id.outputs.anydesk_id }}
           body: "你好"
           attachments: ${{ env.SCREENSHOT_PATH }}  # 附加截图
       - name: Hold for 190 minutes
