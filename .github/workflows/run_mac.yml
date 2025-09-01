@@ -29,6 +29,8 @@ jobs:
           cliclick c:470,180
           sleep 4
           cliclick c:401,576
+          sleep 4
+          cliclick c:524,480
 
 
 
