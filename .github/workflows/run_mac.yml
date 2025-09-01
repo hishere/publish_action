@@ -23,9 +23,9 @@ jobs:
           sleep 3
                 
           open /System/Library/PreferencePanes/Security.prefPane
-          sleep 3
+          sleep 4
           cliclick c:863,600
-          sleep 2
+          sleep 4
           cliclick c:470,180
           sleep 2
 
