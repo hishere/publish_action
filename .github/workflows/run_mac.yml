@@ -22,7 +22,7 @@ jobs:
           
           open -a AnyDesk
           sleep 10
-          echo "password111" | sudo /Applications/AnyDesk.app/Contents/MacOS/AnyDesk --set-password
+          echo "password111" | sudo anydesk --set-password
                 
           # 运行 AnyDesk 命令获取 ID，并去除可能的换行符
           ANYDESK_ID=$(/Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id | tr -d '\n')
