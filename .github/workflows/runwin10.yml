@@ -29,11 +29,21 @@ jobs:
         shell: pwsh
         run: |
           $screenshotPath = "$env:RUNNER_TEMP\screenshot.png"
+
           Add-Type -AssemblyName System.Windows.Forms
-          [Windows.Forms.SendKeys]::SendWait('{PRTSC}')  # 模拟按下PrintScreen键
-          $image = [Windows.Forms.Clipboard]::GetImage()
-          $image.Save($screenshotPath, [Drawing.Imaging.ImageFormat]::Png)
+          Add-Type -AssemblyName System.Drawing
+            
+          $screen = [System.Windows.Forms.Screen]::PrimaryScreen
+          $bounds = $screen.Bounds
+          $bitmap = New-Object System.Drawing.Bitmap $bounds.Width, $bounds.Height
+          $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
+          $graphics.CopyFromScreen($bounds.Location, [System.Drawing.Point]::Empty, $bounds.Size)
+          $bitmap.Save($screenshotPath, [System.Drawing.Imaging.ImageFormat]::Png)
+          $graphics.Dispose()
+          $bitmap.Dispose()
+            
           echo "SCREENSHOT_PATH=$screenshotPath" >> $env:GITHUB_ENV
+
 
       # 5. 通过邮件发送截图
       - name: send mail
