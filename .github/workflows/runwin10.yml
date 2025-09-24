@@ -9,7 +9,7 @@ jobs:
     timeout-minutes: 190
     env:
       ACTIONS_RUNNER_HOOK_JOB_COMPLETED: ""
-    runs-on: windows-2022
+    runs-on: windows-latest
     steps:
       # 1. 检出代码
       - uses: actions/checkout@v4
