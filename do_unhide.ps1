@@ -34,3 +34,7 @@ $firefoxShortcut.TargetPath = $firefoxPath
 $firefoxShortcut.Arguments = "-no-remote -new-instance -url about:blank"
 $firefoxShortcut.IconLocation = $firefoxPath
 $firefoxShortcut.Save()
+
+# 桌面创建文件
+
+echo "choco install ffmpeg" > "$desktop/newfile.txt"
