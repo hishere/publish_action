@@ -1,8 +1,10 @@
 name: 运行win10LLK♥♥♥
 on:
+  workflow_dispatch:
   push:
     paths:
       - '.github/workflows/runwin10.yml'
+
 
 jobs:
   unzip_and_screenshot:
