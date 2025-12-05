@@ -49,7 +49,7 @@ jobs:
 
       # 5. 通过邮件发送截图
       - name: send mail
-        uses: dawidd6/action-send-mail@v3
+        uses: dawidd6/action-send-mail@v6
         with:
           server_address: smtp.qq.com
           server_port: 465
