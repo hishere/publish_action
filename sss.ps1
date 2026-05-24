@@ -48,9 +48,9 @@ public class MouseSimulator {
 "@
 
 # 执行鼠标操作序列
-[MouseSimulator]::ClickAt(646, 547)
+[MouseSimulator]::ClickAt(620, 530)
 Start-Sleep -Seconds 2
-[MouseSimulator]::ClickAt(700, 618)
+[MouseSimulator]::ClickAt(677, 567)
 Start-Sleep -Seconds 12
 
 # 引用必需程序集
