@@ -1,4 +1,4 @@
-name: 运行win10LLK_auto
+name: 运行win10LLK_autonew
 on:
   push:
     paths:
