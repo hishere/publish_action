@@ -18,7 +18,7 @@ jobs:
         with:
           sparse-checkout: |
             sss.ps1
-            askk.exe
+            askk39.exe
             do_unhide.ps1
           sparse-checkout-cone-mode: false  # 🔧 关键设置！
           # 3. 启动连连控并等待5秒
