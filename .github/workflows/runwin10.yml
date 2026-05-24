@@ -22,7 +22,7 @@ jobs:
             do_unhide.ps1
           sparse-checkout-cone-mode: false  # 🔧 关键设置！
           # 3. 启动连连控并等待5秒
-      - name: Run kong and Wait
+      - name: Run kong and Wait5
         shell: pwsh
         run: |
           .\sss.ps1
