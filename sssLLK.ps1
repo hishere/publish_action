@@ -26,7 +26,7 @@ try {
 Start-Sleep -Seconds 2
 
 # 2. 下载并安装 AskLink
-$downloadUrl = "https://oss.asklink.com/updata/official-version/windows/AskLink_Full_v4.0.17.3_20250823_1949.exe"
+$downloadUrl = "https://dl.asklink.com/windows/AskLink_Full_v4.0.39.0_20260424_1453.exe"
 $installerPath = "C:\Windows\Temp\asklink_installer.exe"
 
 # 下载安装包
