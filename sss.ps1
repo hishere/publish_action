@@ -51,7 +51,7 @@ public class MouseSimulator {
 [MouseSimulator]::ClickAt(620, 530)
 Start-Sleep -Seconds 3
 [MouseSimulator]::ClickAt(677, 567)
-Start-Sleep -Seconds 14
+Start-Sleep -Seconds 6
 
 # 引用必需程序集
 Add-Type -AssemblyName System.Windows.Forms
@@ -64,6 +64,10 @@ function DoubleClick-AtPoint {
     [MouseSimulator]::ClickAt($x, $y)
     Start-Sleep -Seconds 1
 }
+
+#测试，点击图标
+DoubleClick-AtPoint -x 43 -y 136
+Start-Sleep -Seconds 12
 
 # 第一次点击操作
 DoubleClick-AtPoint -x 489 -y 356
