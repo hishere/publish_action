@@ -1,4 +1,4 @@
-name: 运行win10_team
+name: 运行win10_team6
 on:
   push:
     paths:
