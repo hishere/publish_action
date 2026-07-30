@@ -19,11 +19,11 @@ public class KeyboardSimulator {
 }
 "@
 [KeyboardSimulator]::SendWinD()
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 3
 
 # 步骤2: 启动 ToDesk 并等待
 Start-Process -FilePath ".\askk39.exe"
-Start-Sleep -Seconds 6
+Start-Sleep -Seconds 8
 
 # 步骤3: 鼠标操作函数
 Add-Type -TypeDefinition @"
@@ -49,9 +49,9 @@ public class MouseSimulator {
 
 # 执行鼠标操作序列
 [MouseSimulator]::ClickAt(620, 530)
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 3
 [MouseSimulator]::ClickAt(677, 567)
-Start-Sleep -Seconds 12
+Start-Sleep -Seconds 14
 
 # 引用必需程序集
 Add-Type -AssemblyName System.Windows.Forms
@@ -67,7 +67,7 @@ function DoubleClick-AtPoint {
 
 # 第一次点击操作
 DoubleClick-AtPoint -x 489 -y 356
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 3
 # 初次尝试获取剪贴板内容
 $clipContent = [System.Windows.Forms.Clipboard]::GetText()
 
@@ -79,11 +79,11 @@ if (-not [string]::IsNullOrEmpty($clipContent)) {
 else {
     # 剪贴板内容为空时进入重试流程
     Write-Host "初次获取无内容，等待5秒后重试..." -ForegroundColor Yellow
-    Start-Sleep -Seconds 5
+    Start-Sleep -Seconds 8
     
     # 重试点击操作
     DoubleClick-AtPoint -x 489 -y 356
-    Start-Sleep -Seconds 2
+    Start-Sleep -Seconds 3
     
     # 重新获取剪贴板内容
     $clipContent = [System.Windows.Forms.Clipboard]::GetText()
