@@ -23,7 +23,7 @@ Start-Sleep -Seconds 3
 
 # 步骤2: 启动 ToDesk 并等待
 Start-Process -FilePath ".\askk4045.exe"
-Start-Sleep -Seconds 8
+Start-Sleep -Seconds 12
 
 # 步骤3: 鼠标操作函数
 Add-Type -TypeDefinition @"
