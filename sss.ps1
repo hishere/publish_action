@@ -23,7 +23,7 @@ Start-Sleep -Seconds 3
 
 # 步骤2: 启动 ToDesk 并等待
 
-Start-Process -FilePath ".\askk4045.exe" -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/SP-' -Wait
+Start-Process -FilePath ".\askk4045.exe" -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/SP-'
 
 Start-Sleep -Seconds 10
 
