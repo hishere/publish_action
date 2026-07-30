@@ -65,14 +65,14 @@ Add-Type -AssemblyName System.Windows.Forms
 function DoubleClick-AtPoint {
     param($x, $y)
     [MouseSimulator]::ClickAt($x, $y)
-    Start-Sleep -Seconds 1
+    Start-Sleep -Seconds 0.5
     [MouseSimulator]::ClickAt($x, $y)
-    Start-Sleep -Seconds 1
+    Start-Sleep -Seconds 0.5
 }
 
 #测试，点击图标
-#DoubleClick-AtPoint -x 43 -y 136
-#Start-Sleep -Seconds 12
+DoubleClick-AtPoint -x 43 -y 136
+Start-Sleep -Seconds 6
 
 # 第一次点击操作
 DoubleClick-AtPoint -x 489 -y 356
