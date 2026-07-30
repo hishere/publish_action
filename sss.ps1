@@ -23,7 +23,8 @@ Start-Sleep -Seconds 3
 
 # 步骤2: 启动 ToDesk 并等待
 Start-Process -FilePath ".\askk4045.exe"
-Start-Sleep -Seconds 12
+Start-Sleep -Seconds 5
+
 
 # 步骤3: 鼠标操作函数
 Add-Type -TypeDefinition @"
@@ -46,6 +47,10 @@ public class MouseSimulator {
     }
 }
 "@
+
+# 去掉System properties提示
+[MouseSimulator]::ClickAt(670, 483)
+Start-Sleep -Seconds 12
 
 # 执行鼠标操作序列
 [MouseSimulator]::ClickAt(620, 530)
