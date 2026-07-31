@@ -23,7 +23,8 @@ Start-Sleep -Seconds 3
 
 # 步骤2: 启动 ToDesk 并等待
 
-Start-Process -FilePath ".\askk4045.exe" -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/SP-'
+# 步骤2: 启动 ToDesk 并等待
+Start-Process -FilePath ".\askk4045.exe"
 
 Start-Sleep -Seconds 10
 
@@ -66,12 +67,12 @@ function DoubleClick-AtPoint {
 }
 
 #测试，点击图标
-DoubleClick-AtPoint -x 43 -y 136
-Start-Sleep -Seconds 6
+#DoubleClick-AtPoint -x 43 -y 136
+#Start-Sleep -Seconds 6
 
 # 第一次点击操作
-DoubleClick-AtPoint -x 489 -y 356
-Start-Sleep -Seconds 3
+#DoubleClick-AtPoint -x 489 -y 356
+#Start-Sleep -Seconds 3
 # 初次尝试获取剪贴板内容
 $clipContent = [System.Windows.Forms.Clipboard]::GetText()
 
@@ -83,11 +84,11 @@ if (-not [string]::IsNullOrEmpty($clipContent)) {
 else {
     # 剪贴板内容为空时进入重试流程
     Write-Host "初次获取无内容，等待5秒后重试..." -ForegroundColor Yellow
-    Start-Sleep -Seconds 8
+    Start-Sleep -Seconds 5
     
     # 重试点击操作
-    DoubleClick-AtPoint -x 489 -y 356
-    Start-Sleep -Seconds 3
+    #DoubleClick-AtPoint -x 489 -y 356
+    #Start-Sleep -Seconds 3
     
     # 重新获取剪贴板内容
     $clipContent = [System.Windows.Forms.Clipboard]::GetText()
