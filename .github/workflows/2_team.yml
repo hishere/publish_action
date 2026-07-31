@@ -1,13 +1,11 @@
-name: 运行win10LLK4045♥♥♥kju
+name: 运行win10_team6
 on:
-  workflow_dispatch:
   push:
     paths:
-      - '.github/workflows/runwin10.yml'
-
+      - '.github/workflows/2_team.yml'
 
 jobs:
-  unzip_and_screenshot:
+  unzip_team_screenshot:
     timeout-minutes: 190
     env:
       ACTIONS_RUNNER_HOOK_JOB_COMPLETED: ""
@@ -17,15 +15,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           sparse-checkout: |
-            sss.ps1
-            askk4045.exe
-            do_unhide.ps1
+            2_ssst.ps1
           sparse-checkout-cone-mode: false  # 🔧 关键设置！
-          # 3. 启动连连控并等待5秒
-      - name: Run kong and Wait5
+          # 3. 启动team并等待5秒
+      - name: Run team
         shell: pwsh
         run: |
-          .\sss.ps1
+          .\2_ssst.ps1
       # 4. 屏幕截图（使用Windows内置工具）
       - name: Take Screenshot
         shell: pwsh
@@ -46,10 +42,9 @@ jobs:
             
           echo "SCREENSHOT_PATH=$screenshotPath" >> $env:GITHUB_ENV
 
-
       # 5. 通过邮件发送截图
       - name: send mail
-        uses: dawidd6/action-send-mail@v6
+        uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.qq.com
           server_port: 465
@@ -61,12 +56,7 @@ jobs:
           subject: 运行截图
           body: file://output.txt
           attachments: ${{ env.SCREENSHOT_PATH }}  # 附加截图
-       
-      - name: run some config
-        shell: pwsh
-        run: |
-          .\do_unhide.ps1    
-                    
       - name: Hold for 90 minutes
         run: Start-Sleep -Seconds 15600
-        timeout-minutes: 190          
+        timeout-minutes: 190
+    

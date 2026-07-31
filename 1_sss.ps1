@@ -80,9 +80,9 @@ function DoubleClick-AtPoint {
 #DoubleClick-AtPoint -x 43 -y 136
 #Start-Sleep -Seconds 6
 
-# 第一次点击操作
-#DoubleClick-AtPoint -x 489 -y 356
-#Start-Sleep -Seconds 3
+# 第一次点击操作，复制id密码
+DoubleClick-AtPoint -x 489 -y 356
+Start-Sleep -Seconds 3
 # 初次尝试获取剪贴板内容
 $clipContent = [System.Windows.Forms.Clipboard]::GetText()
 
@@ -97,8 +97,8 @@ else {
     Start-Sleep -Seconds 5
     
     # 重试点击操作
-    #DoubleClick-AtPoint -x 489 -y 356
-    #Start-Sleep -Seconds 3
+    DoubleClick-AtPoint -x 489 -y 356
+    Start-Sleep -Seconds 3
     
     # 重新获取剪贴板内容
     $clipContent = [System.Windows.Forms.Clipboard]::GetText()
