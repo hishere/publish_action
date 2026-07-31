@@ -21,7 +21,6 @@ public class KeyboardSimulator {
 [KeyboardSimulator]::SendWinD()
 Start-Sleep -Seconds 3
 
-# 步骤2: 启动 ToDesk 并等待
 
 # 步骤2: 启动 ToDesk 并等待
 Start-Process -FilePath ".\askk4045.exe"
@@ -30,7 +29,6 @@ Start-Sleep -Seconds 5
 
 
 
-#Start-Process -FilePath "C:\Program Files\AskLink\AskLinkLauncher.exe"
 
 
 # 步骤3: 鼠标操作函数
@@ -61,6 +59,10 @@ public class MouseSimulator {
 Start-Sleep -Seconds 3
 [MouseSimulator]::ClickAt(677, 567)
 Start-Sleep -Seconds 12
+
+#安装完毕，启动
+Start-Process -FilePath "C:\Program Files\AskLink\AskLinkLauncher.exe"
+Start-Sleep -Seconds 5
 
 # 引用必需程序集
 Add-Type -AssemblyName System.Windows.Forms
