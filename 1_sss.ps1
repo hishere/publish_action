@@ -62,7 +62,7 @@ Start-Sleep -Seconds 12
 
 #安装完毕，启动
 Start-Process -FilePath "C:\Program Files\AskLink\AskLinkLauncher.exe"
-Start-Sleep -Seconds 5
+Start-Sleep -Seconds 8
 
 # 引用必需程序集
 Add-Type -AssemblyName System.Windows.Forms
@@ -71,9 +71,9 @@ Add-Type -AssemblyName System.Windows.Forms
 function DoubleClick-AtPoint {
     param($x, $y)
     [MouseSimulator]::ClickAt($x, $y)
-    Start-Sleep -Seconds 0.5
+    Start-Sleep -Seconds 1
     [MouseSimulator]::ClickAt($x, $y)
-    Start-Sleep -Seconds 0.5
+    Start-Sleep -Seconds 1
 }
 
 #测试，点击图标
@@ -81,7 +81,7 @@ function DoubleClick-AtPoint {
 #Start-Sleep -Seconds 6
 
 # 第一次点击操作，复制id密码
-DoubleClick-AtPoint -x 489 -y 356
+DoubleClick-AtPoint -x 468 -y 355
 Start-Sleep -Seconds 3
 # 初次尝试获取剪贴板内容
 $clipContent = [System.Windows.Forms.Clipboard]::GetText()
@@ -97,7 +97,7 @@ else {
     Start-Sleep -Seconds 5
     
     # 重试点击操作
-    DoubleClick-AtPoint -x 489 -y 356
+    DoubleClick-AtPoint -x 468 -y 355
     Start-Sleep -Seconds 3
     
     # 重新获取剪贴板内容
