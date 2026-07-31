@@ -28,11 +28,7 @@ Start-Process -FilePath ".\askk4045.exe"
 
 Start-Sleep -Seconds 5
 
-# 执行鼠标操作序列，同意，install
-[MouseSimulator]::ClickAt(620, 530)
-Start-Sleep -Seconds 3
-[MouseSimulator]::ClickAt(677, 567)
-Start-Sleep -Seconds 12
+
 
 #Start-Process -FilePath "C:\Program Files\AskLink\AskLinkLauncher.exe"
 
@@ -59,6 +55,12 @@ public class MouseSimulator {
 }
 "@
 
+
+# 执行鼠标操作序列，同意，install
+[MouseSimulator]::ClickAt(620, 530)
+Start-Sleep -Seconds 3
+[MouseSimulator]::ClickAt(677, 567)
+Start-Sleep -Seconds 12
 
 # 引用必需程序集
 Add-Type -AssemblyName System.Windows.Forms
