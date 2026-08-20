@@ -25,7 +25,7 @@ Start-Sleep -Seconds 3
 # 步骤2: 启动 ToDesk 并等待
 Start-Process -FilePath ".\askk4045.exe"
 
-Start-Sleep -Seconds 5
+Start-Sleep -Seconds 7
 
 
 
@@ -58,7 +58,7 @@ public class MouseSimulator {
 [MouseSimulator]::ClickAt(620, 530)
 Start-Sleep -Seconds 3
 [MouseSimulator]::ClickAt(677, 567)
-Start-Sleep -Seconds 12
+Start-Sleep -Seconds 14
 
 #安装完毕，启动
 Start-Process -FilePath "C:\Program Files\AskLink\AskLinkLauncher.exe"
