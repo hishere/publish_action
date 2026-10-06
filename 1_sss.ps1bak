@@ -23,21 +23,11 @@ Start-Sleep -Seconds 3
 
 
 # 步骤2: 启动 ToDesk 并等待
-#Start-Process -FilePath ".\askk4045.exe"
+Start-Process -FilePath ".\askk4045.exe"
 
-#Start-Sleep -Seconds 9
+Start-Sleep -Seconds 9
 
 
-$response = Invoke-RestMethod -Uri "https://www.asklink.com/api-proxy/download/list" -Method Get
-$dataArray = $response.res.data
-foreach ($item in $dataArray) {
-    if ($item.clientType -eq "WIN_HOST") {
-        $url = $item.url
-        Invoke-WebRequest -Uri $url -OutFile "askk.exe"
-        Start-Process -FilePath ".\askk.exe" -ArgumentList "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART" -Wait
-        break
-    }
-}
 
 
 
@@ -64,7 +54,11 @@ public class MouseSimulator {
 "@
 
 
-
+# 执行鼠标操作序列，同意，install
+[MouseSimulator]::ClickAt(620, 530)
+Start-Sleep -Seconds 3
+[MouseSimulator]::ClickAt(677, 567)
+Start-Sleep -Seconds 16
 
 #安装完毕，启动
 Start-Process -FilePath "C:\Program Files\AskLink\AskLinkLauncher.exe"
