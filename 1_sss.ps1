@@ -65,7 +65,7 @@ public class MouseSimulator {
 
 
 
-
+Start-Sleep -Seconds 12
 #安装完毕，启动
 Start-Process -FilePath "C:\Program Files\AskLink\AskLinkLauncher.exe"
 Start-Sleep -Seconds 8
