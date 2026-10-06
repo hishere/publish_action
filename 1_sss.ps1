@@ -28,16 +28,31 @@ Start-Sleep -Seconds 3
 #Start-Sleep -Seconds 9
 
 
+Write-Output "开始爬取..."
 $response = Invoke-RestMethod -Uri "https://www.asklink.com/api-proxy/download/list" -Method Get
-$dataArray = $response.res.data
+$dataArray = $response.data
 foreach ($item in $dataArray) {
-    if ($item.clientType -eq "WIN_HOST") {
+    if ($item.clientType -eq "WIN") {
         $url = $item.url
+        Write-Output "Downloading: $url"
         Invoke-WebRequest -Uri $url -OutFile "askk.exe"
-        Start-Process -FilePath ".\askk.exe" -ArgumentList "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART" -Wait
+        Write-Output "下载完成，开始安装..."
+        
+        # 异步启动安装进程，不等待
+        $process = Start-Process -FilePath ".\askk.exe" -ArgumentList "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART" -PassThru
+        
+        # 等待最多8秒
+        $process.WaitForExit(8000) | Out-Null
+        
+        if (-not $process.HasExited) {
+            Write-Output "安装进程仍在运行，已等待8秒，继续执行..."
+        } else {
+            Write-Output "安装完成"
+        }
         break
     }
 }
+
 
 
 
@@ -68,7 +83,7 @@ public class MouseSimulator {
 Start-Sleep -Seconds 12
 #安装完毕，启动
 Start-Process -FilePath "C:\Program Files\AskLink\AskLinkLauncher.exe"
-Start-Sleep -Seconds 8
+Start-Sleep -Seconds 4
 
 # 引用必需程序集
 Add-Type -AssemblyName System.Windows.Forms
